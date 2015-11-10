@@ -5,6 +5,26 @@ public class Tacka {
 	private int y;
 	private String boja;
 	
+	public Tacka(){
+		
+	}
+	
+	public Tacka(int x, int y){
+		this.x = x;
+		this.y = y;
+	}
+	
+	public Tacka(int x, int y, String boja){
+		this.x = x;
+		this.y = y;
+		this.boja = boja;
+	}
+	
+	public String toString(){
+		return "("+getX()+","+getY()+")";
+		 		
+	}
+	
 	public void pomeriNa(int naX, int naY){
 		x = naX;
 		y = naY;

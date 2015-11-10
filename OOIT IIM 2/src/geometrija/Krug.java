@@ -5,6 +5,28 @@ public class Krug {
 	private int radius;
 	private String boja;
 
+	public Krug(){
+
+	}
+
+	public Krug(Tacka centar, int radius){
+		this.centar = centar;
+		this.radius = radius;
+	}
+	
+	public Krug(Tacka centar, int radius, String boja){
+		this.centar = centar;
+		this.radius = radius;
+		this.boja = boja;
+	
+	}
+	public String toString(){
+		return "Centar = (" + getCentar().getX() + "," + getCentar().getY() +"), poluprecnik = " +  radius;
+	}
+	
+	
+	
+
 	public void pomeriNa(int x,int y){
 		centar.pomeriNa(x, y);
 	}

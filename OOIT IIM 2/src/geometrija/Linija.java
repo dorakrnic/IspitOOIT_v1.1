@@ -5,16 +5,43 @@ public class Linija {
 	private Tacka krajnja;
 	private String boja;
 	
+	
+	public Linija(){
+
+	}
+
+	public Linija(Tacka pocetna, Tacka krajnja){
+		this.pocetna = pocetna;
+		this.krajnja = krajnja;
+	}
+
+	public Linija(Tacka pocetna, Tacka krajnja, String boja){
+		this.pocetna = pocetna;
+		this.krajnja = krajnja;
+		this.boja = boja;
+	}
+	
+	public String toString(){
+		return "("+pocetna.getX()+","+pocetna.getY()+")-->("+krajnja.getX()+","+krajnja.getY()+")";
+	}
+	
+	public Tacka sredinaLinije(){
+		int sredinaX = ( getPocetna().getX() + getKrajnja().getX() ) / 2;
+		int sredinaY = ( pocetna.getY() + krajnja.getY() ) / 2;
+		return new Tacka(sredinaX, sredinaY);
+		
+	}
+
 	public void pomeriZa(int zaX, int zaY){
 		pocetna.pomeriZa(zaX, zaY);
 		krajnja.pomeriZa(zaX, zaY);
 	}
-	
-	public double duzina(String milos){
+
+	public double duzina(){
 		double duzina = pocetna.udaljenost(krajnja);
 		return duzina;
 	}
-	
+
 	public Tacka getPocetna() {
 		return pocetna;
 	}
@@ -35,7 +62,7 @@ public class Linija {
 	public void setBoja(String boja) {
 		this.boja = boja;
 	}
-	
-	
+
+
 
 }

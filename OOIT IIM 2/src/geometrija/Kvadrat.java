@@ -5,6 +5,30 @@ public class Kvadrat {
 	private int stranica;
 	private String boja;
 
+	public Kvadrat(){
+
+	}
+
+	public Kvadrat(Tacka goreLevo, int stranica){
+		this.goreLevo = goreLevo;
+		this.stranica = stranica;
+	}
+
+	public Kvadrat(Tacka goreLevo, int stranica,String boja){
+		this.goreLevo = goreLevo;
+		this.stranica = stranica;
+		this.boja = boja;
+
+	}
+
+	public Linija dijagonalaKvadrata(){
+		return new Linija(goreLevo, new Tacka(goreLevo.getX() + stranica,goreLevo.getY() + stranica));
+	}
+
+	public Tacka centarKvadrata(){
+		return dijagonalaKvadrata().sredinaLinije();
+	}
+
 	public int povrsina(){
 		return stranica*stranica;
 	}
@@ -42,6 +66,9 @@ public class Kvadrat {
 		this.boja = boja;
 	}
 
-
+	public String toString(){
+		String kvadrat = "Gornji levi ugao = (" + goreLevo.getX() + "," + goreLevo.getY() + "), stranica = " + getStranica();
+		return kvadrat;
+	}
 
 }

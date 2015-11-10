@@ -7,6 +7,43 @@ public class Pravougaonik {
 	private int visina;
 	private String boja;
 
+	public Pravougaonik(){
+
+	}
+	
+	public Pravougaonik(Tacka goreLevo, int sirina, int visina){
+		this.goreLevo = goreLevo;
+		this.sirina = sirina;
+		this.visina = visina;
+
+	}
+	
+	public Pravougaonik(Tacka goreLevo, int sirina, int visina, String boja){
+		this.goreLevo = goreLevo;
+		this.sirina = sirina;
+		this.visina = visina;
+		this.boja = boja;
+
+	}
+	
+	public String toString(){
+		return "Gornji levi ugao = ("+getGoreLevo().getX()+","+getGoreLevo().getY()+"), sirina = "+getSirina()+". visina = "+getVisina();
+	}
+	
+	public Linija dijagonala(){
+		int xDoleDesno=goreLevo.getX() + sirina;
+		int yDoleDesno=goreLevo.getY() + visina;
+		Tacka doleDesno= new Tacka(xDoleDesno,yDoleDesno);
+		Linija d = new Linija(goreLevo, doleDesno);
+		return d;
+		// moze i ovako:
+		// return new Linija(goreLevo, new Tacka(goreLevo.getX() + sirina,goreLevo.getY() + visina));
+	}
+	
+	public Tacka centarPravougaonika(){
+		return dijagonala().sredinaLinije();
+	}
+
 	public int povrsina(){
 		int p = sirina * visina;
 		return p;
@@ -57,5 +94,6 @@ public class Pravougaonik {
 		this.boja = boja;
 	}
 
+	
 
 }
