@@ -97,7 +97,7 @@ public class Testiranje {
 		p1.getGoreLevo().setX((int)k1.povrsina());
 		System.out.println("Vrednost X koordinate tacke goreLevo pravougaonika je: "+p1.getGoreLevo().getX());
 	 */	
-		Tacka t5 = new Tacka(12, 13);
+		Tacka t5 = new Tacka(20, 30);
 		System.out.println("X koordinata t5 je: "+t5.getX());
 		Tacka t6 = new Tacka(20, 30, "PLAVA");
 		System.out.println("Boja t6 je: "+t6.getBoja());
@@ -154,6 +154,8 @@ public class Testiranje {
 		System.out.println("Centar pravougaonika p5 je: " + p5.centarPravougaonika());
 		
 		System.out.println("sredisnja tacka dijagonale pravougaonika p5 :  " + p5.dijagonala().sredinaLinije()+"\n\tcentar kruga k5:"+k5.getCentar());
+		
+		System.out.println(t5.equals(t6));
 	}
 
 }

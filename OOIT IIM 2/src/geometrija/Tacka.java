@@ -1,9 +1,9 @@
 package geometrija;
 
-public class Tacka {
+public class Tacka extends Oblik {
 	private int x;
 	private int y;
-	private String boja;
+
 	
 	public Tacka(){
 		
@@ -18,6 +18,19 @@ public class Tacka {
 		this.x = x;
 		this.y = y;
 		this.boja = boja;
+	}
+	
+	public boolean equals(Object obj){
+		if (obj instanceof Tacka){
+			Tacka pomocna = (Tacka) obj;
+			if (this.x == pomocna.x && this.y == pomocna.y && this.boja == pomocna.boja)
+				return true;
+			else
+				return false;
+			
+		}
+		else
+			return false;
 	}
 	
 	public String toString(){
@@ -59,12 +72,6 @@ public class Tacka {
 		y = novoY;
 	}
 
-	public String getBoja() {
-		return boja;
-	}
 
-	public void setBoja(String boja) {
-		this.boja = boja;
-	}
 
 }

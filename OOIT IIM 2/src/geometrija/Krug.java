@@ -1,9 +1,9 @@
 package geometrija;
 
-public class Krug {
+public class Krug extends Oblik{
 	private Tacka centar;
 	private int radius;
-	private String boja;
+	
 
 	public Krug(){
 
@@ -59,11 +59,5 @@ public class Krug {
 		this.radius = radius;
 	}
 
-	public String getBoja() {
-		return boja;
-	}
-
-	public void setBoja(String boja) {
-		this.boja = boja;
-	}
+	
 }

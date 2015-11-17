@@ -1,9 +1,9 @@
 package geometrija;
 
-public class Linija {
+public class Linija extends Oblik{
 	private Tacka pocetna;
 	private Tacka krajnja;
-	private String boja;
+	
 	
 	
 	public Linija(){
@@ -55,13 +55,7 @@ public class Linija {
 		krajnja = novaKrajnja;
 	}
 
-	public String getBoja() {
-		return boja;
-	}
-
-	public void setBoja(String boja) {
-		this.boja = boja;
-	}
+	
 
 
 

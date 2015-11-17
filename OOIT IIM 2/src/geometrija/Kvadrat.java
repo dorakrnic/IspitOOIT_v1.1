@@ -1,9 +1,9 @@
 package geometrija;
 
-public class Kvadrat {
+public class Kvadrat extends Oblik {
 	private Tacka goreLevo;
 	private int stranica;
-	private String boja;
+	
 
 	public Kvadrat(){
 
@@ -58,14 +58,7 @@ public class Kvadrat {
 		this.stranica = stranica;
 	}
 
-	public String getBoja() {
-		return boja;
-	}
-
-	public void setBoja(String boja) {
-		this.boja = boja;
-	}
-
+	
 	public String toString(){
 		String kvadrat = "Gornji levi ugao = (" + goreLevo.getX() + "," + goreLevo.getY() + "), stranica = " + getStranica();
 		return kvadrat;
