@@ -3,7 +3,7 @@ package geometrija;
 public class Kvadrat extends Oblik {
 	private Tacka goreLevo;
 	private int stranica;
-	
+
 
 	public Kvadrat(){
 
@@ -19,6 +19,17 @@ public class Kvadrat extends Oblik {
 		this.stranica = stranica;
 		this.boja = boja;
 
+	}
+	public boolean equals(Object obj){
+		if (obj instanceof Kvadrat){
+			Kvadrat pomocni = (Kvadrat) obj;
+			if (this.goreLevo.equals(pomocni.goreLevo) && this.stranica == pomocni.stranica)
+				return true;
+			else 
+				return false;
+		}
+		else 
+			return false;
 	}
 
 	public Linija dijagonalaKvadrata(){
@@ -58,7 +69,7 @@ public class Kvadrat extends Oblik {
 		this.stranica = stranica;
 	}
 
-	
+
 	public String toString(){
 		String kvadrat = "Gornji levi ugao = (" + goreLevo.getX() + "," + goreLevo.getY() + "), stranica = " + getStranica();
 		return kvadrat;

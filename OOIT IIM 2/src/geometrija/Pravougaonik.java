@@ -20,6 +20,17 @@ public class Pravougaonik extends Kvadrat {
 
 	}
 
+	public boolean equals (Object obj){
+		if (obj instanceof Pravougaonik) {
+			Pravougaonik pocetni = (Pravougaonik) obj;
+			if (this.getGoreLevo().equals(pocetni.getGoreLevo()) && this.visina == pocetni.visina && this.getStranica() == pocetni.getStranica())
+				return true;
+				else
+					return false;
+		}else
+			return false;
+	}
+	
 	public String toString(){
 		return "Gornji levi ugao = "+this.getGoreLevo()+", sirina = "+getStranica()+". visina = "+getVisina();
 	}

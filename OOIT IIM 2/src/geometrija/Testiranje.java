@@ -139,26 +139,61 @@ public class Testiranje {
 		Kvadrat kv6 = new Kvadrat(
 				new Tacka (l5.sredinaLinije().getX() + p5.dijagonala().getPocetna().getX(), 
 						kv5.centarKvadrata().getY() + kv5.getStranica() ),  
-				k5.getRadius(), 
-				t6.getBoja());
-		
+						k5.getRadius(), 
+						t6.getBoja());
+		Kvadrat kv7 = new Kvadrat(t5, 19);
+
 		System.out.println("X koordinata tacke goreLevo kvadrata kv6 je: " + kv6.getGoreLevo().getX() );
 		System.out.println("Y koordinata tacke goreLevo kvadrata kv6 je: " + kv6.getGoreLevo().getY());
 		System.out.println(t5);
 		System.out.println("Linija l6: "+l6);
-		
+
 		System.out.println("Kvadrat kv6: " + kv6);
 		System.out.println("Pravougaonik p5: " + p5);
 		System.out.println("Krug k5:" + k5);
 		System.out.println("Sredina linije l6: " + l6.sredinaLinije());
 		System.out.println("Centar pravougaonika p5 je: " + p5.centarPravougaonika());
-		
+
 		System.out.println("sredisnja tacka dijagonale pravougaonika p5 :  " + p5.dijagonala().sredinaLinije()+"\n\tcentar kruga k5:"+k5.getCentar());
-		
+
 		System.out.println(t5.equals(t6));
-		
+
 		t5.setX(100);
 		System.out.println("Linije su iste! " +l5.equals(l6));
+		System.out.println("Kvadrati su isti! " + kv7.equals(kv5));
+
+		Pravougaonik p6 = new Pravougaonik(new Tacka (10, 12), 15,(int) l5.duzina());
+
+		System.out.println("Pravougaonici su isti! " + p5.equals(p6));
+
+		Krug k6 = new Krug(t6, 35, "ZELENA");
+		Krofna krofna = new Krofna(20, 30, 100, 50, "Crvena");
+		System.out.println("Krugovi su isti: "+k5.equals(k6));
+		System.out.println("Krofna: " + krofna);
+
+		Krofna krofna1 = new Krofna(20, 30, 80, 50, "Crvena");
+		System.out.println("Krofne su iste! "+krofna.equals(krofna1));
+        Tacka t7 = new Tacka(2, 2);
+        Tacka t8 = new Tacka(4, 2);
+        Tacka t9 = new Tacka(2, 4);
+        Tacka t10 = new Tacka(4, 4);
+        
+        System.out.println("da li je kvadrat: " + daLiJeKvadrat(t5, t8, t9, t10));
+        
+
+	}
+	public static boolean daLiJeKvadrat (Tacka t1, Tacka t2, Tacka t3, Tacka t4){
+		if (t1.getX() == t3.getX() && 
+				t2.getX() == t4.getX() &&
+				t1.getY() == t2.getY() &&
+				t3.getY() == t4.getY() &&
+				t1.udaljenost(t2) == t1.udaljenost(t3))
+			return true;
+
+		else
+			return false;
+
+
 	}
 
 }

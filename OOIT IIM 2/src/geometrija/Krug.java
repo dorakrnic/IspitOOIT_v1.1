@@ -20,6 +20,18 @@ public class Krug extends Oblik{
 		this.boja = boja;
 	
 	}
+	
+	public boolean equals (Object obj){
+		if (obj instanceof Object){
+			Krug pomocni = (Krug) obj;
+			if(this.centar.equals(pomocni.centar) && this.radius == pomocni.radius)
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+	}
 	public String toString(){
 		return "Centar = (" + getCentar().getX() + "," + getCentar().getY() +"), poluprecnik = " +  radius;
 	}
