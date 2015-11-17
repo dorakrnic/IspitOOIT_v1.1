@@ -9,6 +9,7 @@ public class Linija extends Oblik{
 	public Linija(){
 
 	}
+	
 
 	public Linija(Tacka pocetna, Tacka krajnja){
 		this.pocetna = pocetna;
@@ -20,6 +21,18 @@ public class Linija extends Oblik{
 		this.krajnja = krajnja;
 		this.boja = boja;
 	}
+	public boolean equals (Object obj){
+		if(obj instanceof Linija){
+			Linija pomocna = (Linija) obj;
+			if(this.pocetna.equals(pomocna.pocetna) && this.krajnja.equals(pomocna.krajnja))
+				return true;
+			else
+				return false;
+		}
+		else 
+			return false;
+	}
+	
 	
 	public String toString(){
 		return "("+pocetna.getX()+","+pocetna.getY()+")-->("+krajnja.getX()+","+krajnja.getY()+")";

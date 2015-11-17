@@ -23,7 +23,7 @@ public class Tacka extends Oblik {
 	public boolean equals(Object obj){
 		if (obj instanceof Tacka){
 			Tacka pomocna = (Tacka) obj;
-			if (this.x == pomocna.x && this.y == pomocna.y && this.boja == pomocna.boja)
+			if (this.x == pomocna.x && this.y == pomocna.y )
 				return true;
 			else
 				return false;

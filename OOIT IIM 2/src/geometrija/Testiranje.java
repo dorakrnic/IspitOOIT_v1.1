@@ -102,11 +102,11 @@ public class Testiranje {
 		Tacka t6 = new Tacka(20, 30, "PLAVA");
 		System.out.println("Boja t6 je: "+t6.getBoja());
 
-		Linija l5 = new Linija(t5, t6);
+		Linija l5 = new Linija(t6, t5);
 		System.out.println("Boja krajnje tacke linije l5 je: "+l5.getKrajnja().getBoja());
 
 		// kreirati liniju l6 sa koordinatama pocetne tacke 5 i 6, krajnja tacka t5 i boja ista kao t6
-		Linija l6 = new Linija(new Tacka(5, 6), t5, t6.getBoja());
+		Linija l6 = new Linija(t5, t6, t6.getBoja());
 
 		System.out.println("X koordinata pocetne tacke linije je: "+l6.getPocetna().getX());
 
@@ -156,6 +156,9 @@ public class Testiranje {
 		System.out.println("sredisnja tacka dijagonale pravougaonika p5 :  " + p5.dijagonala().sredinaLinije()+"\n\tcentar kruga k5:"+k5.getCentar());
 		
 		System.out.println(t5.equals(t6));
+		
+		t5.setX(100);
+		System.out.println("Linije su iste! " +l5.equals(l6));
 	}
 
 }
