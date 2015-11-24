@@ -176,12 +176,37 @@ public class Testiranje {
         Tacka t7 = new Tacka(2, 2);
         Tacka t8 = new Tacka(4, 2);
         Tacka t9 = new Tacka(2, 4);
-        Tacka t10 = new Tacka(4, 4);
+        //Tacka t10 = new Tacka(4, 4);
         
-        System.out.println("da li je kvadrat: " + daLiJeKvadrat(t5, t8, t9, t10));
+        //System.out.println("da li je kvadrat: " + daLiJeKvadrat(t5, t8, t9));
         
-
+        Tacka t10 = new Tacka(2, 2);
+        Tacka t11 = new Tacka(4, 4);
+        Tacka t12 = new Tacka(6, 4);
+        Tacka t13 = new Tacka(7, 6);
+        
+        Linija l10  = new Linija(t10,t11);
+        Linija l11  = new Linija(t11,t12);
+        Linija l12  = new Linija(t12,t13);
+        
+        Polilinija poli = new Polilinija(3);
+        
+        poli.dodajSegment(l10);
+        poli.dodajSegment(l11);
+        poli.dodajSegment(l12);
+        
+   /*     poli.ukloniSegment();
+        poli.ukloniSegment();
+        poli.ukloniSegment();
+        poli.ukloniSegment();*/
+        
+       for(int i = 0; i<poli.getSegmenti().length;i++){
+    	   System.out.println(poli.getSegmenti() [ i ] );
+       } 
+        System.out.println("Zbir duzina linija je: "+(l10.duzina()+l11.duzina()+l12.duzina()));
+        System.out.println("Duzina polilinije je: "+ poli.duzina());
 	}
+	
 	public static boolean daLiJeKvadrat (Tacka t1, Tacka t2, Tacka t3, Tacka t4){
 		if (t1.getX() == t3.getX() && 
 				t2.getX() == t4.getX() &&

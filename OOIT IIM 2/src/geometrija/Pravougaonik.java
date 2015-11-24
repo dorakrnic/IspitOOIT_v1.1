@@ -1,5 +1,7 @@
 package geometrija;
 
+import java.awt.Graphics;
+
 public class Pravougaonik extends Kvadrat {
 	private int visina;
 
@@ -20,6 +22,12 @@ public class Pravougaonik extends Kvadrat {
 
 	}
 
+	public void crtajSe (Graphics g){
+		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), visina);
+		
+	}
+	
+	
 	public boolean equals (Object obj){
 		if (obj instanceof Pravougaonik) {
 			Pravougaonik pocetni = (Pravougaonik) obj;

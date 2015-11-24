@@ -1,5 +1,7 @@
 package geometrija;
 
+import java.awt.Graphics;
+
 public class Linija extends Oblik{
 	private Tacka pocetna;
 	private Tacka krajnja;
@@ -21,6 +23,11 @@ public class Linija extends Oblik{
 		this.krajnja = krajnja;
 		this.boja = boja;
 	}
+	
+	public void crtajSe(Graphics g){
+		g.drawLine(pocetna.getX(), pocetna.getY(), krajnja.getX(), krajnja.getY());
+	}
+	
 	public boolean equals (Object obj){
 		if(obj instanceof Linija){
 			Linija pomocna = (Linija) obj;

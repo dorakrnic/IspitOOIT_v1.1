@@ -1,5 +1,7 @@
 package geometrija;
 
+import java.awt.Graphics;
+
 public class Kvadrat extends Oblik {
 	private Tacka goreLevo;
 	private int stranica;
@@ -20,6 +22,11 @@ public class Kvadrat extends Oblik {
 		this.boja = boja;
 
 	}
+	
+	public void crtajSe(Graphics g){
+		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), stranica);
+	}
+	
 	public boolean equals(Object obj){
 		if (obj instanceof Kvadrat){
 			Kvadrat pomocni = (Kvadrat) obj;
