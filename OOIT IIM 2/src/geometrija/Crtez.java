@@ -20,7 +20,7 @@ public class Crtez extends JPanel{
 			
 	}
 	
-	public void paint (Graphics g){
+	public void paint (Graphics g){/*
 		g.drawString("Neki text na poziciji 150 150", 150, 150);
 		Tacka t1 = new Tacka(50, 50);
 		t1.crtajSe(g);
@@ -44,6 +44,22 @@ public class Crtez extends JPanel{
 		k1.dijagonalaKvadrata().crtajSe(g);
 		p1.centarPravougaonika().crtajSe(g);
 		p1.getGoreLevo().crtajSe(g);
+	*/
+		Tacka t10 = new Tacka(2, 200);
+		Tacka t11 = new Tacka(200, 400);
+		Tacka t12 = new Tacka(400, 800);
+		Tacka t13 = new Tacka(800, 1000);
+
+		Linija l10  = new Linija(t10,t11);
+		Linija l11  = new Linija(t11,t12);
+		Linija l12  = new Linija(t12,t13);
+
+		Polilinija2 poli = new Polilinija2();
+
+		poli.dodajSegment(l10);
+		poli.dodajSegment(l11);
+		poli.dodajSegment(l12);
+		poli.crtajSe(g);
 	}
 
 }

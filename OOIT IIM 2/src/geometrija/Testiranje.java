@@ -1,5 +1,8 @@
 package geometrija;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Testiranje {
 
 	public static void main(String[] args) {/*
@@ -96,7 +99,7 @@ public class Testiranje {
 
 		p1.getGoreLevo().setX((int)k1.povrsina());
 		System.out.println("Vrednost X koordinate tacke goreLevo pravougaonika je: "+p1.getGoreLevo().getX());
-	 */	
+
 		Tacka t5 = new Tacka(20, 30);
 		System.out.println("X koordinata t5 je: "+t5.getX());
 		Tacka t6 = new Tacka(20, 30, "PLAVA");
@@ -129,13 +132,13 @@ public class Testiranje {
 		Kvadrat kv5 = new Kvadrat(t5, 19);
 		System.out.println("X koordinata centra opisanog kruga kvadrata kv5: "+kv5.centarKvadrata().getX());
 
-		/* 
+
 		kreirati kvadrat kv 6:
 			X goreLevo: zbir X sredisne tacke linije l5 i X pocetne tacke dijagonale p5
 			Y gore levo: Y centra kvadrata kv5 uvecan za vrednost stranice kv5
 			stranica: Radius k5
 			boja: boja t6
-		 */
+
 		Kvadrat kv6 = new Kvadrat(
 				new Tacka (l5.sredinaLinije().getX() + p5.dijagonala().getPocetna().getX(), 
 						kv5.centarKvadrata().getY() + kv5.getStranica() ),  
@@ -177,36 +180,71 @@ public class Testiranje {
         Tacka t8 = new Tacka(4, 2);
         Tacka t9 = new Tacka(2, 4);
         //Tacka t10 = new Tacka(4, 4);
-        
+
         //System.out.println("da li je kvadrat: " + daLiJeKvadrat(t5, t8, t9));
-        
+
         Tacka t10 = new Tacka(2, 2);
         Tacka t11 = new Tacka(4, 4);
         Tacka t12 = new Tacka(6, 4);
         Tacka t13 = new Tacka(7, 6);
-        
+
         Linija l10  = new Linija(t10,t11);
         Linija l11  = new Linija(t11,t12);
         Linija l12  = new Linija(t12,t13);
-        
+
         Polilinija poli = new Polilinija(3);
-        
+
         poli.dodajSegment(l10);
         poli.dodajSegment(l11);
         poli.dodajSegment(l12);
-        
-   /*     poli.ukloniSegment();
+
         poli.ukloniSegment();
         poli.ukloniSegment();
-        poli.ukloniSegment();*/
-        
+        poli.ukloniSegment();
+        poli.ukloniSegment();
+
        for(int i = 0; i<poli.getSegmenti().length;i++){
     	   System.out.println(poli.getSegmenti() [ i ] );
        } 
         System.out.println("Zbir duzina linija je: "+(l10.duzina()+l11.duzina()+l12.duzina()));
         System.out.println("Duzina polilinije je: "+ poli.duzina());
+	 */
+
+		Tacka t1 = new Tacka(10, 15);
+		ArrayList lista = new ArrayList();
+
+		lista.add(10);
+		//System.out.println(lista.get(0));
+		lista.add("Ovo je neki string");
+		//System.out.println(lista.get(1));
+		lista.add(t1);
+		//System.out.println(lista.get(2));
+		lista.add(0, t1);
+		//System.out.println(lista.get(0));
+		Iterator it = lista.iterator();
+		while (it.hasNext()){
+			System.out.println(it.next());
+		}
+
+		Tacka t10 = new Tacka(2, 2);
+		Tacka t11 = new Tacka(4, 4);
+		Tacka t12 = new Tacka(6, 4);
+		Tacka t13 = new Tacka(7, 6);
+
+		Linija l10  = new Linija(t10,t11);
+		Linija l11  = new Linija(t11,t12);
+		Linija l12  = new Linija(t12,t13);
+
+		Polilinija2 poli = new Polilinija2();
+
+		poli.dodajSegment(l10);
+		poli.dodajSegment(l11);
+		poli.dodajSegment(l12);
+
+		
+
 	}
-	
+
 	public static boolean daLiJeKvadrat (Tacka t1, Tacka t2, Tacka t3, Tacka t4){
 		if (t1.getX() == t3.getX() && 
 				t2.getX() == t4.getX() &&
