@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Crtez extends JPanel{
@@ -17,16 +18,16 @@ public class Crtez extends JPanel{
 		Crtez c = new Crtez();
 		prozor.getContentPane().add(c);
 		c.setBackground(Color.black);
-			
+
 	}
-	
+
 	public void paint (Graphics g){/*
 		g.drawString("Neki text na poziciji 150 150", 150, 150);
 		Tacka t1 = new Tacka(50, 50);
 		t1.crtajSe(g);
 		Tacka t2 = new Tacka(75, 75);
-		
-		
+
+
 		t2.crtajSe(g);
 		t2.pomeriNa(10, 10);
 		t2.crtajSe(g);
@@ -44,7 +45,7 @@ public class Crtez extends JPanel{
 		k1.dijagonalaKvadrata().crtajSe(g);
 		p1.centarPravougaonika().crtajSe(g);
 		p1.getGoreLevo().crtajSe(g);
-	*/
+	 */
 		Tacka t10 = new Tacka(2, 200);
 		Tacka t11 = new Tacka(200, 400);
 		Tacka t12 = new Tacka(400, 800);
@@ -52,14 +53,29 @@ public class Crtez extends JPanel{
 
 		Linija l10  = new Linija(t10,t11);
 		Linija l11  = new Linija(t11,t12);
-		Linija l12  = new Linija(t12,t13);
+		Linija l12  = new Linija(t10,t13);
 
 		Polilinija2 poli = new Polilinija2();
 
-		poli.dodajSegment(l10);
-		poli.dodajSegment(l11);
-		poli.dodajSegment(l12);
+		try {
+			poli.dodajSegment(l10);
+			poli.dodajSegment(l11);
+			poli.dodajSegment(l12);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try {
+			poli.ukloniSegment();
+			poli.ukloniSegment();
+			poli.ukloniSegment();
+			poli.ukloniSegment();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		poli.crtajSe(g);
+		repaint();
 	}
 
 }

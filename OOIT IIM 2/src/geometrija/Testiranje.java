@@ -3,6 +3,8 @@ package geometrija;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.JOptionPane;
+
 public class Testiranje {
 
 	public static void main(String[] args) {/*
@@ -236,11 +238,13 @@ public class Testiranje {
 		Linija l12  = new Linija(t12,t13);
 
 		Polilinija2 poli = new Polilinija2();
-
+/*
 		poli.dodajSegment(l10);
 		poli.dodajSegment(l11);
 		poli.dodajSegment(l12);
-
+	*/
+		
+		JOptionPane.showMessageDialog(null, "RADI!!!", "GRESKA!", JOptionPane.ERROR_MESSAGE);
 		
 
 	}
