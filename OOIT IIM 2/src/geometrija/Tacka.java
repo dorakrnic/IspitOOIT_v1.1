@@ -1,5 +1,6 @@
 package geometrija;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Tacka extends Oblik {
@@ -22,9 +23,19 @@ public class Tacka extends Oblik {
 		this.boja = boja;
 	}
 
+	public void selektovan(Graphics g){
+		g.setColor(pronadjiBoju("plava"));
+		g.drawRect(x-3, y-3, 6, 6);
+	}
+
 	public void crtajSe(Graphics g){
+		g.setColor(pronadjiBoju(this.getBoja()));
 		g.drawLine(x-2, y, x+2, y);
 		g.drawLine(x, y-2, x, y+2);		
+		
+		if(isSelektovan()){
+			selektovan(g);
+		}
 	}
 
 	public boolean equals(Object obj){

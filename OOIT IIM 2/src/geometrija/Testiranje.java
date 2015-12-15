@@ -244,8 +244,12 @@ public class Testiranje {
 		poli.dodajSegment(l12);
 	*/
 		
-		JOptionPane.showMessageDialog(null, "RADI!!!", "GRESKA!", JOptionPane.ERROR_MESSAGE);
+		//JOptionPane.showMessageDialog(null, "RADI!!!", "GRESKA!", JOptionPane.ERROR_MESSAGE);
+		Kvadrat kv1 = new Kvadrat(t11, 50);
+		System.out.println(kv1.sadrzi(kv1.centarKvadrata().getX(), kv1.centarKvadrata().getY()));
 		
+		Krug kr2 = new Krug(t11, 10);
+		System.out.println(kr2.sadrzi(t11.getX(), t11.getY()));
 
 	}
 
@@ -262,5 +266,7 @@ public class Testiranje {
 
 
 	}
+	
+	
 
 }

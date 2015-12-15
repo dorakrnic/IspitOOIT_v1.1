@@ -23,6 +23,7 @@ public class Pravougaonik extends Kvadrat {
 	}
 
 	public void crtajSe (Graphics g){
+		g.setColor(pronadjiBoju(this.getBoja()));
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), visina);
 		
 	}
@@ -57,12 +58,12 @@ public class Pravougaonik extends Kvadrat {
 		return dijagonala().sredinaLinije();
 	}
 
-	public int povrsina(){
+	public double povrsina(){
 		int p = getStranica() * visina;
 		return p;
 	}
 
-	public int obim(){
+	public double obim(){
 		int o = 2*getStranica() + 2*visina;
 		return o;
 	}

@@ -2,7 +2,7 @@ package geometrija;
 
 import java.awt.Graphics;
 
-public class Kvadrat extends Oblik {
+public class Kvadrat extends PovrsinskiOblik {
 	private Tacka goreLevo;
 	private int stranica;
 
@@ -23,7 +23,29 @@ public class Kvadrat extends Oblik {
 
 	}
 	
+	
+	public void popuni(Graphics g) {
+		g.setColor(pronadjiBoju(getBojaUnutrasnjosti()));
+		g.fillRect(getGoreLevo().getX()+1, getGoreLevo().getY()+1, getStranica()-1, stranica-1);
+		
+	}
+
+	
+	public boolean sadrzi(int x, int y) {
+		if(   (goreLevo.getX() < x && goreLevo.getX() + stranica > x)    &&
+				goreLevo.getY() < y && goreLevo.getY() + stranica > y)
+		return true;
+		else
+			return false;
+	}
+	
+	public String toString(){
+		String kvadrat = "Gornji levi ugao = (" + goreLevo.getX() + "," + goreLevo.getY() + "), stranica = " + getStranica();
+		return kvadrat;
+	}
+	
 	public void crtajSe(Graphics g){
+		g.setColor(pronadjiBoju(getBoja()));
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), stranica);
 	}
 	
@@ -47,11 +69,11 @@ public class Kvadrat extends Oblik {
 		return dijagonalaKvadrata().sredinaLinije();
 	}
 
-	public int povrsina(){
+	public double povrsina(){
 		return stranica*stranica;
 	}
 
-	public int obim(){
+	public double obim(){
 		return 4*stranica;
 	}
 
@@ -75,11 +97,4 @@ public class Kvadrat extends Oblik {
 	public void setStranica(int stranica) {
 		this.stranica = stranica;
 	}
-
-
-	public String toString(){
-		String kvadrat = "Gornji levi ugao = (" + goreLevo.getX() + "," + goreLevo.getY() + "), stranica = " + getStranica();
-		return kvadrat;
-	}
-
 }

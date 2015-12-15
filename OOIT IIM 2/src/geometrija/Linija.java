@@ -1,17 +1,18 @@
 package geometrija;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Linija extends Oblik{
 	private Tacka pocetna;
 	private Tacka krajnja;
-	
-	
-	
+
+
+
 	public Linija(){
 
 	}
-	
+
 
 	public Linija(Tacka pocetna, Tacka krajnja){
 		this.pocetna = pocetna;
@@ -23,11 +24,24 @@ public class Linija extends Oblik{
 		this.krajnja = krajnja;
 		this.boja = boja;
 	}
-	
-	public void crtajSe(Graphics g){
-		g.drawLine(pocetna.getX(), pocetna.getY(), krajnja.getX(), krajnja.getY());
+
+	public void selektovan(Graphics g){
+
+		g.setColor(Color.BLUE);
+		pocetna.selektovan(g);
+		krajnja.selektovan(g);
+		sredinaLinije().selektovan(g);
+
 	}
-	
+
+	public void crtajSe(Graphics g){
+		g.setColor(pronadjiBoju(getBoja()));
+		g.drawLine(pocetna.getX(), pocetna.getY(), krajnja.getX(), krajnja.getY());
+		if(isSelektovan()){
+			selektovan(g);
+		}
+	}
+
 	public boolean equals (Object obj){
 		if(obj instanceof Linija){
 			Linija pomocna = (Linija) obj;
@@ -39,17 +53,17 @@ public class Linija extends Oblik{
 		else 
 			return false;
 	}
-	
-	
+
+
 	public String toString(){
 		return "("+pocetna.getX()+","+pocetna.getY()+")-->("+krajnja.getX()+","+krajnja.getY()+")";
 	}
-	
+
 	public Tacka sredinaLinije(){
 		int sredinaX = ( getPocetna().getX() + getKrajnja().getX() ) / 2;
 		int sredinaY = ( pocetna.getY() + krajnja.getY() ) / 2;
 		return new Tacka(sredinaX, sredinaY);
-		
+
 	}
 
 	public void pomeriZa(int zaX, int zaY){
@@ -75,7 +89,7 @@ public class Linija extends Oblik{
 		krajnja = novaKrajnja;
 	}
 
-	
+
 
 
 
