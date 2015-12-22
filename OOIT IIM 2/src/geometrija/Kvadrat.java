@@ -1,8 +1,9 @@
 package geometrija;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
-public class Kvadrat extends PovrsinskiOblik {
+public class Kvadrat extends PovrsinskiOblik implements Comparable{
 	private Tacka goreLevo;
 	private int stranica;
 
@@ -22,6 +23,25 @@ public class Kvadrat extends PovrsinskiOblik {
 		this.boja = boja;
 
 	}
+	
+	
+	public int compareTo(Object o) {
+		Kvadrat novi = (Kvadrat) o;
+		return (int)(this.stranica - novi.stranica);
+	}
+
+	
+	public void selektovan(Graphics g){
+		g.setColor(Color.BLUE);
+		new Linija(getGoreLevo(), new Tacka(getGoreLevo().getX()+stranica, getGoreLevo().getY())).selektovan(g);
+		new Linija(getGoreLevo(), new Tacka(getGoreLevo().getX(), getGoreLevo().getY()+stranica)).selektovan(g);
+		new Linija(new Tacka(getGoreLevo().getX()+stranica, getGoreLevo().getY()), dijagonalaKvadrata().getKrajnja()).selektovan(g);
+		new Linija(new Tacka(getGoreLevo().getX(), getGoreLevo().getY()+stranica), dijagonalaKvadrata().getKrajnja()).selektovan(g);
+
+
+
+	}
+
 	
 	
 	public void popuni(Graphics g) {
@@ -47,6 +67,9 @@ public class Kvadrat extends PovrsinskiOblik {
 	public void crtajSe(Graphics g){
 		g.setColor(pronadjiBoju(getBoja()));
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), stranica);
+		
+		if(isSelektovan())
+			selektovan(g);
 	}
 	
 	public boolean equals(Object obj){
@@ -97,4 +120,5 @@ public class Kvadrat extends PovrsinskiOblik {
 	public void setStranica(int stranica) {
 		this.stranica = stranica;
 	}
-}
+
+	}

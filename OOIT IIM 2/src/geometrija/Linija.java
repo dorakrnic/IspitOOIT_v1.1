@@ -3,7 +3,7 @@ package geometrija;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Linija extends Oblik{
+public class Linija extends Oblik implements Comparable{
 	private Tacka pocetna;
 	private Tacka krajnja;
 
@@ -25,6 +25,11 @@ public class Linija extends Oblik{
 		this.boja = boja;
 	}
 
+	public int compareTo(Object o) {
+		Linija nova = (Linija) o;
+		return (int) (this.duzina() - nova.duzina() );
+	}
+	
 	public void selektovan(Graphics g){
 
 		g.setColor(Color.BLUE);
@@ -88,6 +93,10 @@ public class Linija extends Oblik{
 	public void setKrajnja(Tacka novaKrajnja) {
 		krajnja = novaKrajnja;
 	}
+
+
+	
+	
 
 
 

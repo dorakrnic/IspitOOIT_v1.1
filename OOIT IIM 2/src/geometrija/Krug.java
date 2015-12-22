@@ -2,7 +2,7 @@ package geometrija;
 
 import java.awt.Graphics;
 
-public class Krug extends PovrsinskiOblik{
+public class Krug extends PovrsinskiOblik implements Comparable{
 	private Tacka centar;
 	private int radius;
 
@@ -22,8 +22,19 @@ public class Krug extends PovrsinskiOblik{
 		this.boja = boja;
 
 	}
+	
+	public int compareTo(Object o) {
+		Krug drugi = (Krug)o;
+		return this.radius - drugi.radius;
+	}
 
 
+
+	public void selektovan(Graphics g)	{
+		new Linija(new Tacka(centar.getX(), centar.getY()-radius), new Tacka(centar.getX(), centar.getY() + radius)).selektovan(g);
+		new Linija(new Tacka(centar.getX()-radius, centar.getY()), new Tacka(centar.getX()+radius, centar.getY())).selektovan(g);
+	}
+	
 	public void popuni(Graphics g) {
 		g.setColor(pronadjiBoju(getBojaUnutrasnjosti()));
 		g.fillOval(getCentar().getX()-radius+1, getCentar().getY() - radius+1, radius*2-2, 2*radius-2 );
@@ -45,6 +56,9 @@ public class Krug extends PovrsinskiOblik{
 	public void crtajSe(Graphics g){
 		g.setColor(pronadjiBoju(getBoja()));
 		g.drawOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
+		
+		if(isSelektovan())
+			selektovan(g);
 	}
 
 
@@ -98,7 +112,7 @@ public class Krug extends PovrsinskiOblik{
 		this.radius = radius;
 	}
 
-
+	
 
 
 }

@@ -1,6 +1,7 @@
 package geometrija;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.swing.JOptionPane;
@@ -229,9 +230,9 @@ public class Testiranje {
 		}
 
 		Tacka t10 = new Tacka(2, 2);
-		Tacka t11 = new Tacka(4, 4);
-		Tacka t12 = new Tacka(6, 4);
-		Tacka t13 = new Tacka(7, 6);
+		Tacka t11 = new Tacka(20, 20);
+		Tacka t12 = new Tacka(30, 30);
+		Tacka t13 = new Tacka(50,50);
 
 		Linija l10  = new Linija(t10,t11);
 		Linija l11  = new Linija(t11,t12);
@@ -250,7 +251,95 @@ public class Testiranje {
 		
 		Krug kr2 = new Krug(t11, 10);
 		System.out.println(kr2.sadrzi(t11.getX(), t11.getY()));
+		
+		System.out.println("\nSortiranje\n");
+		
+		Tacka nizTacka[] = new Tacka[4];
+		
+		nizTacka[0] = t13;
+		nizTacka[1] = t11;
+		nizTacka[2] = t10;
+		nizTacka[3] = t12;
+		
+		System.out.println("Nesortiran niz: ");
+		for(int i = 0; i<nizTacka.length;i++){
+			System.out.println(nizTacka[i]);
+		}
+		
+		Arrays.sort(nizTacka);
+		
+		System.out.println("Sortiran niz: ");
+		for(int i = 0; i<nizTacka.length;i++){
+			System.out.println(nizTacka[i]);
+		}
 
+		Linija nizLinija[] = new Linija[3];
+		
+		nizLinija[0] = l11;
+		nizLinija[1] = l10;
+		nizLinija[2] = l12;
+		
+		System.out.println("Nesortiran niz: ");
+		
+		for(int i = 0; i<nizLinija.length; i++){
+			System.out.println(nizLinija[i]);
+		}
+		
+		Arrays.sort(nizLinija);
+		
+		System.out.println("Sortiran niz: ");
+		for(int i = 0; i<nizLinija.length; i++){
+			System.out.println(nizLinija[i]);
+		}
+		
+		Kvadrat nizKvadrata [] = new Kvadrat [3];
+		nizKvadrata[0] = new Kvadrat(t13, 10);
+		nizKvadrata[1] = new Kvadrat(t11, 8);
+		nizKvadrata[2] = new Kvadrat(t12, 16);
+		
+		System.out.println("nesortiran niz");
+		for (int i = 0; i<nizKvadrata.length; i++)
+			
+			System.out.println(nizKvadrata[i]);
+		
+		System.out.println("sortiran niz");
+		Arrays.sort(nizKvadrata);
+		for (int i = 0; i<nizKvadrata.length; i++)
+			System.out.println(nizKvadrata[i]);
+		
+		
+		Krug kr1 = new Krug(new Tacka(10, 15), 16);
+		Krug kr3 = new Krug(new Tacka(11, 13), 7);
+		
+		Krug nizKrugova[] = new Krug[3];
+		nizKrugova[0] = kr1;
+		nizKrugova[1] = kr2;
+		nizKrugova[2] = kr3;
+		
+		System.out.println("Nesortiran niz");
+		for(int i = 0; i < nizKrugova.length; i++)
+			System.out.println(nizKrugova[i]);
+		
+		Arrays.sort(nizKrugova);
+		System.out.println("Sortiran niz");
+		for(int i = 0; i < nizKrugova.length; i++)
+			System.out.println(nizKrugova[i]);
+
+		
+		Pravougaonik nizPravougaonika[]= new Pravougaonik [3];
+		nizPravougaonika[0]=new Pravougaonik(t13, 10, 5);
+		nizPravougaonika[1]=new Pravougaonik(t13, 15, 3);
+		nizPravougaonika[2]=new Pravougaonik(t13, 20, 4);
+		
+		System.out.println("Nesortiran niz");
+		for(int i = 0; i < nizPravougaonika.length; i++)
+			System.out.println(nizPravougaonika[i]);
+		
+		Arrays.sort(nizPravougaonika);
+		System.out.println("Sortiran niz");
+		for(int i = 0; i < nizPravougaonika.length; i++)
+			System.out.println(nizPravougaonika[i]);
+		
 	}
 
 	public static boolean daLiJeKvadrat (Tacka t1, Tacka t2, Tacka t3, Tacka t4){
@@ -266,6 +355,8 @@ public class Testiranje {
 
 
 	}
+	
+	
 	
 	
 

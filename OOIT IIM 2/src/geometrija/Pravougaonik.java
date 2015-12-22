@@ -1,5 +1,6 @@
 package geometrija;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Pravougaonik extends Kvadrat {
@@ -15,6 +16,14 @@ public class Pravougaonik extends Kvadrat {
 		this.visina = visina;
 
 	}
+	
+	public void selektovan(Graphics g){
+		g.setColor(Color.BLUE);
+		new Linija(getGoreLevo(), new Tacka(getGoreLevo().getX()+getStranica(), getGoreLevo().getY())).selektovan(g);
+		new Linija(getGoreLevo(), new Tacka(getGoreLevo().getX(), getGoreLevo().getY()+visina)).selektovan(g);
+		new Linija(new Tacka(getGoreLevo().getX()+getStranica(), getGoreLevo().getY()), dijagonala().getKrajnja()).selektovan(g);
+		new Linija(new Tacka(getGoreLevo().getX(), getGoreLevo().getY()+visina), dijagonala().getKrajnja()).selektovan(g);
+	}
 
 	public Pravougaonik(Tacka goreLevo, int sirina, int visina, String boja){
 		this(goreLevo, sirina, visina);
@@ -22,6 +31,12 @@ public class Pravougaonik extends Kvadrat {
 
 	}
 
+	public int compareTo(Object o) {
+		Pravougaonik novi = (Pravougaonik) o;
+		return (int)(this.povrsina() - novi.povrsina());
+	}
+	
+	
 	public void crtajSe (Graphics g){
 		g.setColor(pronadjiBoju(this.getBoja()));
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), visina);

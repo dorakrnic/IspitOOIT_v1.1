@@ -54,28 +54,28 @@ public class Crtez extends JPanel{
 		Linija l10  = new Linija(t10,t11, "Crvena");
 		Linija l11  = new Linija(t11,t12);
 		Linija l12  = new Linija(t10,t13,"roza");
-		
+
 		Kvadrat k1= new Kvadrat(new Tacka(500, 50), 100, "zuta");
 		Kvadrat k2 = new Kvadrat(new Tacka(700, 50), 75, "roza");
-		
+
 		Pravougaonik p1=new Pravougaonik(new Tacka(500, 300), 150, 75,  "plava");
 		Pravougaonik p2=new Pravougaonik(new Tacka(700, 300), 100, 65,"crvena");
-		
+
 		p1.getGoreLevo().setBoja("ZelenA");
 		p1.getGoreLevo().crtajSe(g);
 		Krug kr1= new Krug(k1.centarKvadrata(), k1.getStranica()/2 , "crvena");
 		kr1.crtajSe(g);
 		kr1.getCentar().setBoja("crna");
 		kr1.getCentar().crtajSe(g);
-		
+
 		//k2.setBoja("zelena");
 		k2.setBojaUnutrasnjosti("zelena");
 		k2.popuni(g);
-		
+
 		k1.setBojaUnutrasnjosti("roza");
 		k1.popuni(g);
-		
-		
+
+
 		t10.crtajSe(g);
 		t12.crtajSe(g);
 		l10.crtajSe(g);
@@ -84,20 +84,26 @@ public class Crtez extends JPanel{
 		k2.crtajSe(g);
 		p1.crtajSe(g);
 		p2.crtajSe(g);
-		
+		p2.selektovan(g);
+
 		Krug kr5 = new Krug(t11, 66,"PlaVa");
 		kr5.crtajSe(g);
-		
+
 		kr5.setBojaUnutrasnjosti("zuta");
 		kr5.popuni(g);
-		
+
 		t12.setSelektovan(true);
-		
+
 		Linija l5 = new Linija(k1.getGoreLevo(), p2.getGoreLevo(), "zuta");
-		l5.setSelektovan(true);
+		//l5.setSelektovan(true);
 		l5.crtajSe(g);
-		//t12.selektovan(g);
-		
+
+		k2.setSelektovan(true);
+		k2.crtajSe(g);
+
+		kr5.setSelektovan(true);
+		kr5.crtajSe(g);
+
 		/*
 		Polilinija2 poli = new Polilinija2();
 
