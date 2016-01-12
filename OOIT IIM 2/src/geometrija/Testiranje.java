@@ -340,6 +340,7 @@ public class Testiranje {
 		for(int i = 0; i < nizPravougaonika.length; i++)
 			System.out.println(nizPravougaonika[i]);
 		
+			
 	}
 
 	public static boolean daLiJeKvadrat (Tacka t1, Tacka t2, Tacka t3, Tacka t4){

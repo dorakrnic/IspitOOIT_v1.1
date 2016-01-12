@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JToggleButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class VezbaWB extends JFrame {
 
@@ -97,9 +98,12 @@ public class VezbaWB extends JFrame {
 		lblKolarov.setBounds(178, 248, 138, 14);
 		pnlOsnovni.add(lblKolarov);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(360, 161, 147, 203);
+		pnlOsnovni.add(scrollPane);
+		
 		final JList lstImena = new JList();
-		lstImena.setBounds(360, 161, 147, 203);
-		pnlOsnovni.add(lstImena);
+		scrollPane.setViewportView(lstImena);
 		lstImena.setModel(dlm);
 		
 		JToggleButton tglbtnIvanovic = new JToggleButton("Ivanovic");
@@ -109,6 +113,7 @@ public class VezbaWB extends JFrame {
 				lblIvanovic.setVisible(true);
 				lblMatic.setVisible(false);
 				lblKolarov.setVisible(false);
+				dlm.addElement("Branislav Ivanovic");
 				
 			}
 		});
@@ -123,6 +128,7 @@ public class VezbaWB extends JFrame {
 				lblMatic.setVisible(true);
 				lblIvanovic.setVisible(false);
 				lblKolarov.setVisible(false);
+				dlm.addElement("Nemanja Matic");
 			}
 		});
 		buttonGroup.add(tglbtnMatic);
@@ -136,6 +142,7 @@ public class VezbaWB extends JFrame {
 				lblKolarov.setVisible(true);
 				lblMatic.setVisible(false);
 				lblIvanovic.setVisible(false);
+				dlm.addElement("Aleksandar Kolarov");
 			}
 		});
 		buttonGroup.add(tglbtnKolarov);

@@ -95,6 +95,13 @@ public class Linija extends Oblik implements Comparable{
 	}
 
 
+	@Override
+	public void pomeriNa(int x, int y) {
+		
+		
+	}
+
+
 	
 	
 
