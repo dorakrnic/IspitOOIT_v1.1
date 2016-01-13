@@ -7,7 +7,24 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Crtez extends JPanel{
+	ArrayList oblici = new ArrayList();
+	public Crtez() {
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int x = e.getX();
+				int y = e.getY();
+				Tacka t = new Tacka(x, y,"crna");
+				oblici.add(t);
+			}
+		});
+	}
 
 	public static void main(String[] args) {
 		JFrame prozor = new JFrame();
@@ -21,7 +38,16 @@ public class Crtez extends JPanel{
 
 	}
 
-	public void paint (Graphics g){/*
+	public void paint (Graphics g){
+		
+		Iterator it = oblici.iterator();
+		while(it.hasNext()){
+			Oblik o = (Oblik) it.next();
+			o.crtajSe(g);
+			
+		}
+		
+		/*
 		g.drawString("Neki text na poziciji 150 150", 150, 150);
 		Tacka t1 = new Tacka(50, 50);
 		t1.crtajSe(g);
@@ -45,7 +71,7 @@ public class Crtez extends JPanel{
 		k1.dijagonalaKvadrata().crtajSe(g);
 		p1.centarPravougaonika().crtajSe(g);
 		p1.getGoreLevo().crtajSe(g);
-	 */
+	 
 		Tacka t10 = new Tacka(2, 200, "plava");
 		Tacka t11 = new Tacka(200, 400);
 		Tacka t12 = new Tacka(400, 800, "ZeleNa");
@@ -104,7 +130,7 @@ public class Crtez extends JPanel{
 		kr5.setSelektovan(true);
 		kr5.crtajSe(g);
 
-		/*
+		
 		Polilinija2 poli = new Polilinija2();
 
 		try {
