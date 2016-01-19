@@ -212,22 +212,22 @@ public class Testiranje {
         System.out.println("Zbir duzina linija je: "+(l10.duzina()+l11.duzina()+l12.duzina()));
         System.out.println("Duzina polilinije je: "+ poli.duzina());
 	 */
+		Tacka t6= new Tacka(2, 2);
+		Krug k5 = new Krug(t6, 35, "ZELENA");
+		ArrayList<Krug> lista = new ArrayList<Krug>();
 
-		Tacka t1 = new Tacka(10, 15);
-		ArrayList lista = new ArrayList();
-
-		lista.add(10);
-		//System.out.println(lista.get(0));
-		lista.add("Ovo je neki string");
+		lista.add(k5);
+		
+		lista.add(k5);
 		//System.out.println(lista.get(1));
-		lista.add(t1);
+		lista.add(k5);
 		//System.out.println(lista.get(2));
-		lista.add(0, t1);
+		lista.add(k5);
 		//System.out.println(lista.get(0));
-		Iterator it = lista.iterator();
-		while (it.hasNext()){
+		Iterator<Krug> it = lista.iterator();
+		while (it.hasNext())
 			System.out.println(it.next());
-		}
+		
 
 		Tacka t10 = new Tacka(2, 2);
 		Tacka t11 = new Tacka(20, 20);

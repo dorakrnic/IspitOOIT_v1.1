@@ -75,7 +75,7 @@ public class LicniPodaci extends JFrame {
 		txtJMBG.setBounds(174, 124, 149, 20);
 		contentPane.add(txtJMBG);
 
-		JButton btnLicniPodaci = new JButton("Lični podaci");
+		JButton btnLicniPodaci = new JButton("Licni podaci");
 		btnLicniPodaci.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -106,7 +106,7 @@ public class LicniPodaci extends JFrame {
 
 							JOptionPane.showMessageDialog(null,
 									"Ime: "+txtIme.getText()+"\nPrezime: "+txtPrezime.getText()+"\nJMBG: "+txtJMBG.getText(),
-									"Lični podaci", //utf obrrati pažnju
+									"Licni podaci", //utf obrrati pažnju
 									JOptionPane.WARNING_MESSAGE);
 							
 						} catch (NumberFormatException e1) {
@@ -132,7 +132,7 @@ public class LicniPodaci extends JFrame {
 
 					JOptionPane.showMessageDialog(null,
 							"Niste uneli JMBG",
-							"Lični podaci", //utf obrrati pažnju
+							"Licni podaci", //utf obrrati pažnju
 							JOptionPane.ERROR_MESSAGE);
 			}
 

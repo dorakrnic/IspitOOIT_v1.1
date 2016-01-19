@@ -158,6 +158,19 @@ public class VezbaWB extends JFrame {
 		buttonGroup.add(tglbtnKolarov);
 		tglbtnKolarov.setBounds(30, 244, 121, 23);
 		pnlOsnovni.add(tglbtnKolarov);
+		
+		JButton btnPravougaonik = new JButton("Pravougaonik");
+		btnPravougaonik.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DlgPravougaonik dlgp = new DlgPravougaonik();
+				dlgp.setVisible(true);
+				
+				System.out.println("Visina: "+dlgp.visina+"\nSirina: "+dlgp.sirina+"\nBoja: "+dlgp.boja);
+				
+			}
+		});
+		btnPravougaonik.setBounds(30, 294, 121, 23);
+		pnlOsnovni.add(btnPravougaonik);
 
 
 

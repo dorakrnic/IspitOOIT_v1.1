@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import wb.DlgPravougaonik;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -21,7 +23,13 @@ public class Crtez extends JPanel{
 				int x = e.getX();
 				int y = e.getY();
 				Tacka t = new Tacka(x, y,"crna");
-				oblici.add(t);
+				DlgPravougaonik dlgp = new DlgPravougaonik();
+				dlgp.setVisible(true);
+				int visina = Integer.parseInt(dlgp.visina);
+				int sirina = Integer.parseInt(dlgp.sirina);
+				Pravougaonik p = new Pravougaonik(t, sirina, visina, dlgp.boja);
+				
+				oblici.add(p);
 			}
 		});
 	}

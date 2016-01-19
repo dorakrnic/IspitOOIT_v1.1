@@ -2,14 +2,19 @@ package geometrija;
 
 import java.awt.Color;
 import java.awt.Graphics;
+/**
+@author Teodora Lolic
+@version 1.0
 
+Klasa Tacka omogucava kreiranje tacaka.
+*/
 public class Tacka extends Oblik implements Comparable{
 	private int x;
 	private int y;
 
 
 	public Tacka(){
-
+boja = "";
 	}
 
 	public Tacka(int x, int y){
@@ -33,7 +38,10 @@ public class Tacka extends Oblik implements Comparable{
 		g.setColor(pronadjiBoju("plava"));
 		g.drawRect(x-3, y-3, 6, 6);
 	}
-
+	/**
+	 Ova metoda omogucuje iscrtavanje objekata
+	 @return ne vraca nista
+	 * */
 	public void crtajSe(Graphics g){
 		g.setColor(pronadjiBoju(this.getBoja()));
 		g.drawLine(x-2, y, x+2, y);
