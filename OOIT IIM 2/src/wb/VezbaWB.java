@@ -67,7 +67,7 @@ public class VezbaWB extends JFrame {
 		contentPane.add(pnlOsnovni);
 		pnlOsnovni.setLayout(null);
 
-		JLabel lblNaslov = new JLabel("Ovo je neki naslov!");
+		JLabel lblNaslov = new JLabel("Naslov!");
 		lblNaslov.setForeground(new Color(0, 0, 255));
 		lblNaslov.setFont(new Font("Monotype Corsiva", Font.BOLD | Font.ITALIC, 22));
 		lblNaslov.setBounds(178, 11, 189, 50);
