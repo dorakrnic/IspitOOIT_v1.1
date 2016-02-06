@@ -158,11 +158,15 @@ public class DlgKrug extends JDialog {
 									int yKoo=Integer.parseInt(txtY.getText());
 									int radius = Integer.parseInt(txtRadius.getText());
 									String boja=(String) comboBoja.getSelectedItem();
-									
-									Tacka tacka=new Tacka(xKoo,yKoo);
-									krug=new Krug(tacka,radius,boja);
-									dispose();
-									
+									if(radius!=0){
+										Tacka tacka=new Tacka(xKoo,yKoo);
+										krug=new Krug(tacka,radius,boja);
+										
+										dispose();
+									}
+									else{
+										JOptionPane.showMessageDialog(null, "Radius ne moze biti 0", "Greska", JOptionPane.ERROR_MESSAGE);
+									}
 								}catch(NumberFormatException ex){
 									System.out.println(ex);
 									JOptionPane.showMessageDialog(null, "Morate uneti brojeve", "Greska", JOptionPane.ERROR_MESSAGE);

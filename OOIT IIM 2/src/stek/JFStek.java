@@ -23,10 +23,14 @@ import javax.swing.JList;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.event.AncestorListener;
 import javax.swing.event.AncestorEvent;
 import javax.swing.JScrollPane;
+import javax.swing.UIManager;
 
 public class JFStek extends JFrame {
 
@@ -73,7 +77,8 @@ public class JFStek extends JFrame {
 		
 		
 		JButton btnDodaj = new JButton("Dodaj");
-		btnDodaj.setBounds(30, 171, 158, 55);
+		btnDodaj.setFont(UIManager.getFont("Button.font"));
+		btnDodaj.setBounds(30, 171, 158, 34);
 		contentPane.add(btnDodaj);
 		btnDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -96,8 +101,41 @@ public class JFStek extends JFrame {
 
 			}
 		});
-		btnUkloni.setBounds(198, 171, 158, 55);
+		btnUkloni.setBounds(198, 171, 158, 34);
 		contentPane.add(btnUkloni);
+		
+		JButton btnSortirajAsc = new JButton("Sortiraj listu na dole");
+		btnSortirajAsc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Krug> listaKrugova = new ArrayList<Krug>();
+		        for (int i = 0; i < dlm.getSize() ; i++){
+		            listaKrugova.add((Krug)dlm.getElementAt(i));
+		        }
+		        Collections.sort(listaKrugova);
+		        dlm.removeAllElements();
+		        for (int i = 0; i<listaKrugova.size(); i++)
+		            dlm.addElement(listaKrugova.get(i));
+			}
+		});
+		btnSortirajAsc.setBounds(30, 216, 158, 35);
+		contentPane.add(btnSortirajAsc);
+		
+		JButton btnSortirajDesc = new JButton("Sortiraj listu na gore");
+		btnSortirajDesc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Krug> listaKrugova = new ArrayList<Krug>();
+		        for (int i = 0; i < dlm.getSize() ; i++){
+		            listaKrugova.add((Krug)dlm.getElementAt(i));
+		        }
+				Comparator cmp = Collections.reverseOrder();
+				Collections.sort(listaKrugova,cmp);
+				dlm.removeAllElements();
+				 for (int i = 0; i<listaKrugova.size(); i++)
+			            dlm.addElement(listaKrugova.get(i));
+			}
+		});
+		btnSortirajDesc.setBounds(198, 216, 158, 35);
+		contentPane.add(btnSortirajDesc);
 
 	}
 }
