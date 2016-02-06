@@ -74,10 +74,8 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 			return false;
 	}
 	public String toString(){
-		return "Centar = (" + getCentar().getX() + "," + getCentar().getY() +"), poluprecnik = " +  radius;
+		return "Krug: Centar = (" + getCentar().getX() + "," + getCentar().getY() +"), poluprecnik = " +  radius +", boja= " +this.boja;
 	}
-
-
 
 
 	public void pomeriNa(int x,int y){
