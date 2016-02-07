@@ -46,7 +46,7 @@ public class DlgKrug extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
+	 * Create the dialog - Dodaj dugme
 	 */
 	public DlgKrug() {
 		setModal(true);
@@ -194,7 +194,10 @@ public class DlgKrug extends JDialog {
 		
 		
 	}
-	
+	/**
+	 * Kreira se za oduzimanje sa steka
+	 * @param k - prosledice se objekat sa nulte pozicije u listi
+	 */
 	public DlgKrug(final Krug k) {
 		setModal(true);
 		setTitle("Dijalog ukloni");
@@ -266,6 +269,9 @@ public class DlgKrug extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						/*
+						 * ovde nije vazno da prosledim - samo zbog testiranja
+						 */
 						getAction(e.getActionCommand());
 						dispose();
 					}
@@ -297,8 +303,8 @@ public class DlgKrug extends JDialog {
 	protected void getAction(String s) {		
 		action=s;
 	}
-	/*
-	 * postavlja vrednost komande u promenljivu da bi JFStek proveravao akciju na osnovu koje oduzima/ne oduzima sa liste
+	/**
+	 *@param postavlja vrednost komande u promenljivu da bi JFStek proveravao akciju na osnovu koje oduzima/ne oduzima sa liste
 	 */
 
 }

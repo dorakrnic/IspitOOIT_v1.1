@@ -12,8 +12,6 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.FlowLayout;
 
-import net.miginfocom.swing.MigLayout;
-
 import javax.swing.JButton;
 
 import java.awt.GridLayout;
