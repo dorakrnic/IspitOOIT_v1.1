@@ -14,40 +14,62 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 
-public class Crtez extends JPanel{
+public class Crtez1 extends JPanel{
 	ArrayList oblici = new ArrayList();
-	public Crtez() {
-		setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, Color.LIGHT_GRAY, null, null));
+
+	private int clickCounter=0;
+	
+	public Crtez1() {
+		setBackground(Color.WHITE);
+		setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		addMouseListener(new MouseAdapter() {
+			private Tacka t1;
+			private Tacka t2;
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int x = e.getX();
-				int y = e.getY();
-				Tacka t = new Tacka(x, y,"crna");
-				DlgPravougaonik dlgp = new DlgPravougaonik();
-				dlgp.setVisible(true);
-				int visina = Integer.parseInt(dlgp.visina);
-				int sirina = Integer.parseInt(dlgp.sirina);
-				Pravougaonik p = new Pravougaonik(t, sirina, visina, dlgp.boja);
 				
-				oblici.add(p);
-				
+				if(PaintAgain.actionStr=="TACKA"){
+					int x = e.getX();
+					int y = e.getY();
+					Tacka t = new Tacka(x, y,"crna");
+					oblici.add(t);
+				}
+				if(PaintAgain.actionStr=="LINIJA"){
+					clickCounter++;
+					System.out.println("kliknuto na btn linija");
+					int x=e.getX();
+					int y=e.getY();
+					System.out.println(clickCounter);
+					if(clickCounter%2!=0){
+						t1=new Tacka(x,y,"crna");
+						oblici.add(t1);
+					}else{
+						t2=new Tacka(x,y,"crna");
+						Linija l=new Linija(t1,t2,"crna");
+						oblici.add(t2);
+						oblici.add(l);
+						clickCounter=0;
+					}
+				}
+
 			}
 		});
 	}
 
-	public static void main(String[] args) {
-		JFrame prozor = new JFrame();
-		prozor.setSize(800, 600);
-		prozor.setVisible(true);
-		prozor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		prozor.setTitle("Vidi prozor!!!");
-		Crtez c = new Crtez();
-		prozor.getContentPane().add(c);
-		c.setBackground(Color.black);
-
-	}
+//	public static void main(String[] args) {
+//		JFrame prozor = new JFrame();
+//		prozor.setSize(800, 600);
+//		prozor.setVisible(true);
+//		prozor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		prozor.setTitle("Vidi prozor!!!");
+//		Crtez1 c = new Crtez1();
+//		prozor.getContentPane().add(c);
+//		c.setBackground(Color.black);
+//
+//	}
 
 	public void paint (Graphics g){
 		
