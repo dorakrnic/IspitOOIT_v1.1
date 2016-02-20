@@ -13,10 +13,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.border.BevelBorder;
 
 public class Crtez extends JPanel{
 	ArrayList oblici = new ArrayList();
 	public Crtez() {
+		setBorder(new BevelBorder(BevelBorder.LOWERED, Color.BLACK, Color.LIGHT_GRAY, null, null));
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -54,7 +56,7 @@ public class Crtez extends JPanel{
 			o.crtajSe(g);
 			
 		}
-		
+		repaint();
 		/*
 		g.drawString("Neki text na poziciji 150 150", 150, 150);
 		Tacka t1 = new Tacka(50, 50);
@@ -159,7 +161,7 @@ public class Crtez extends JPanel{
 		}
 
 		poli.crtajSe(g);*/
-		repaint();
+		
 	}
 
 }

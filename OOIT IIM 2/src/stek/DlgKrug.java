@@ -137,7 +137,8 @@ public class DlgKrug extends JDialog {
 						lblMandatory_x.setVisible(false);
 						lblMandatory_y.setVisible(false);
 						lblMandatory_r.setVisible(false);
-						//prvo cu proveriti da li su popunjena int polja, ako neko nije postavim oznaku za mandatory i poruku
+						//prvo cu proveriti da li su popunjena int polja, 
+						//ako neko nije postavim oznaku * za mandatory i poruku
 						//i zatim kad su sva popunjena proveravam da li su brojevi i ostavljam poruku ako nisu
 						boolean isPopulate=true;
 						if(txtX.getText().length()==0){
@@ -196,7 +197,7 @@ public class DlgKrug extends JDialog {
 	}
 	/**
 	 * Kreira se za oduzimanje sa steka
-	 * @param k - prosledice se objekat sa nulte pozicije u listi
+	 * @param k - prosledjujemo objekat tipa Krug sa nulte pozicije u listi
 	 */
 	public DlgKrug(final Krug k) {
 		setModal(true);
