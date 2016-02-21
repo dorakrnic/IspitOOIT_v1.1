@@ -16,6 +16,8 @@ import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
 
 public class PaintAgain extends JFrame {
 
@@ -42,7 +44,9 @@ public class PaintAgain extends JFrame {
 	 * Create the frame.
 	 */
 	public PaintAgain() {
-		final Crtez1 c=new Crtez1();
+		
+		final Crtez1 crtez1=new Crtez1(this);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 431);
 		contentPane = new JPanel();
@@ -53,11 +57,12 @@ public class PaintAgain extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		c.setBorder(new LineBorder(new Color(0, 0, 0), 3));
-		c.setBackground(Color.WHITE);
-		c.setBounds(159, 5, 270, 252);
-		c.removeComponentListener(null);
-		contentPane.add(c);
+		crtez1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		crtez1.setBackground(Color.WHITE);
+		crtez1.setBounds(159, 5, 270, 252);
+		crtez1.removeComponentListener(null);
+		contentPane.add(crtez1);
+		crtez1.setLayout(null);
 		
 		JButton btnTacka = new JButton("TACKA");
 		btnTacka.addActionListener(new ActionListener() {

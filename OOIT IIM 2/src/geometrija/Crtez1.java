@@ -18,18 +18,24 @@ import javax.swing.border.LineBorder;
 
 public class Crtez1 extends JPanel{
 	ArrayList oblici = new ArrayList();
+	PaintAgain paintAgain;
 
 	private int clickCounter=0;
 	
-	public Crtez1() {
+	public Crtez1(PaintAgain p) {
+		paintAgain=p;
+		
 		setBackground(Color.WHITE);
 		setBorder(new LineBorder(new Color(0, 0, 0), 3));
+		
 		addMouseListener(new MouseAdapter() {
 			private Tacka t1;
 			private Tacka t2;
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
+				System.out.println(e.getX());
 				
 				if(PaintAgain.actionStr=="TACKA"){
 					int x = e.getX();
@@ -72,7 +78,7 @@ public class Crtez1 extends JPanel{
 //	}
 
 	public void paint (Graphics g){
-		
+		super.paint(g);
 		Iterator it = oblici.iterator();
 		while(it.hasNext()){
 			Oblik o = (Oblik) it.next();

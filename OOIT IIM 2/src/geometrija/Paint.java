@@ -31,9 +31,9 @@ public class Paint extends JFrame {
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	ArrayList oblici = new ArrayList();
-	private JPanel radniPanel;
-	public String action;
-
+	
+	public static String actionStr;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -64,17 +64,12 @@ public class Paint extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		radniPanel=new RadniPanel();
-		
-		final JPanel pnlListener = new JPanel();
-
-		pnlListener.setBackground(Color.WHITE);
-		pnlListener.setBounds(198, 11, 410, 327);
-		contentPane.add(pnlListener);
-		pnlListener.setLayout(null);
-		radniPanel.setBounds(0,0,390,327);
-		pnlListener.add(radniPanel);
-		radniPanel.setVisible(true);
+		final RadniPanel radniPanel=new RadniPanel(this);
+		radniPanel.setBounds(197, 11, 411, 327);
+		contentPane.add(radniPanel);
+		//radniPanel.setVisible(true);
+		radniPanel.removeComponentListener(null);
+		radniPanel.setLayout(null);
 		
 		final JTextArea txtAreaInfo = new JTextArea();
 		txtAreaInfo.setBounds(198, 349, 410, 28);
@@ -83,16 +78,8 @@ public class Paint extends JFrame {
 		final JToggleButton tglBtnTacka = new JToggleButton("TACKA");
 		tglBtnTacka.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtAreaInfo.setText("********* Crtanje tacke klikom na radnu povrsinu ************");
-				radniPanel.addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent e) {
-						int x = e.getX();
-						int y = e.getY();
-						System.out.println("x: " +x +" y: " +y);
-						Tacka t = new Tacka(x, y,"crna");
-						
-					}
-				});
+				txtAreaInfo.setText("********* Crtanje tacke klikom na radnu povrsinu ************");		
+				actionStr=e.getActionCommand();
 			}
 		});
 		buttonGroup.add(tglBtnTacka);

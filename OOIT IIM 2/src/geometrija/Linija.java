@@ -24,6 +24,12 @@ public class Linija extends Oblik implements Comparable{
 		this.krajnja = krajnja;
 		this.boja = boja;
 	}
+	
+	public Linija(Tacka pocetna, Tacka krajnja, Color color){
+		this.pocetna = pocetna;
+		this.krajnja = krajnja;
+		this.color = color;
+	}
 
 	public int compareTo(Object o) {
 		Linija nova = (Linija) o;
