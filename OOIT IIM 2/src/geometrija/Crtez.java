@@ -50,7 +50,7 @@ public class Crtez extends JPanel{
 	}
 
 	public void paint (Graphics g){
-		
+		super.paint(g);
 		Iterator it = oblici.iterator();
 		while(it.hasNext()){
 			Oblik o = (Oblik) it.next();

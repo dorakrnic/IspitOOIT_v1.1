@@ -4,10 +4,11 @@ import geometrija.Krug;
 import geometrija.Kvadrat;
 import geometrija.Linija;
 import geometrija.Oblik;
-import geometrija.PaintAgain;
+import geometrija.PovrsinskiOblik;
 import geometrija.Pravougaonik;
 import geometrija.Tacka;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Color;
@@ -19,7 +20,7 @@ import java.util.Iterator;
 
 public class PnlCrtez extends JPanel {
 	
-	ArrayList oblici = new ArrayList();
+	ArrayList<Oblik> oblici = new ArrayList();
 	FrmPaint frmP;
 	private int clickCounter=0;
 	/**
@@ -31,6 +32,7 @@ public class PnlCrtez extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			private Tacka t1;
 			private Tacka t2;
+			private Pravougaonik p;
 			
 			public void mouseClicked(MouseEvent e) {
 				//System.out.println(e.getX());
@@ -64,7 +66,7 @@ public class PnlCrtez extends JPanel {
 					dlg.setVisible(true);
 					if(DlgUpit.btnStr=="OK"){
 						int radius=dlg.radius;
-						Krug k=new Krug(t3,radius, FrmPaint.bojaStr);
+						Krug k=new Krug(t3,radius, FrmPaint.bojaStr, FrmPaint.bojaUnutr);
 						oblici.add(k);
 					}	
 				}
@@ -82,10 +84,57 @@ public class PnlCrtez extends JPanel {
 					DlgUpit dlg=new DlgUpit(FrmPaint.actionStr);
 					dlg.setVisible(true);
 					if(DlgUpit.btnStr=="OK"){
-						Pravougaonik p=new Pravougaonik(t5, dlg.radius, dlg.visina, FrmPaint.bojaStr);
+						p=new Pravougaonik(t5, dlg.radius, dlg.visina, FrmPaint.bojaStr);
 						oblici.add(p);
 					}
 				}
+				
+				//na radi !!!! ?????
+				if(FrmPaint.actionStr=="POPUNI"){
+					Iterator it = oblici.iterator();
+					while(it.hasNext()){
+						PovrsinskiOblik o=(PovrsinskiOblik)it.next();
+						
+						if(o.sadrzi(e.getX(), e.getY())){
+							o.setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+							oblici.add((Oblik)o);
+						}
+						
+					}	
+				}
+				
+				if(FrmPaint.actionStr=="SELEKCIJA"){
+					//proci kroz sve oblike , proveriti sa metodom 'sadrzi' da li je unutar oblika i taj oblik setovati na selektovan
+					Iterator it = oblici.iterator();
+					while(it.hasNext()){
+						Oblik o=(Oblik)it.next();
+						System.out.println(o.getClass().getName());
+						if(o.sadrzi(e.getX(), e.getY())){
+							if(o.isSelektovan())
+								o.setSelektovan(false);
+							else
+								o.setSelektovan(true);
+						}
+					}
+				}
+				///obraditi exception...u listi se nalaze i objekti koji nisu tipa Oblik
+				if(FrmPaint.actionStr=="IZBRISI"){
+					Iterator it = oblici.iterator();
+					
+						while(it.hasNext()){
+							Oblik o=(Oblik)it.next();
+							
+							if(o.sadrzi(e.getX(),e.getY())){
+								DlgPoruka dlg=new DlgPoruka();
+								dlg.setVisible(true);
+								if(dlg.btnStr=="OK")
+									oblici.remove((Oblik)o);	
+							}
+						}
+					
+				}
+				
+				
 			}
 		});
 

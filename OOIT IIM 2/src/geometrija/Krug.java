@@ -20,7 +20,13 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 		this.centar = centar;
 		this.radius = radius;
 		this.boja = boja;
-
+	}
+	
+	public Krug(Tacka centar, int radius, String boja, String bojaUnutrasnjosti){
+		this.centar = centar;
+		this.radius = radius;
+		this.boja = boja;
+		this.setBojaUnutrasnjosti(bojaUnutrasnjosti);
 	}
 	
 	public int compareTo(Object o) {

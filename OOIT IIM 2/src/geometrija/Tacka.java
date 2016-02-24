@@ -104,6 +104,14 @@ boja = "";
 		y = novoY;
 	}
 
+	@Override
+	public boolean sadrzi(int x, int y) {
+		if(x >= this.x-3 && x <= this.x+3 && y >= this.y-3 && y <= this.y+3 )
+			return true;
+		else
+			return false;
+	}
+
 
 
 

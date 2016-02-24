@@ -5,8 +5,10 @@ import geometrija.Oblik;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JToggleButton;
@@ -28,17 +30,21 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JTextField;
 
 public class FrmPaint extends JFrame {
 
 	private JPanel contentPane;
-	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private final ButtonGroup btnGroupOblici = new ButtonGroup();
 	
 	public static String actionStr;
 	public static Color boja;
 	public static String bojaStr="roza";
+	public static String bojaUnutr="zuta";
+	private final ButtonGroup btnGroupAkcija = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -62,7 +68,7 @@ public class FrmPaint extends JFrame {
 	public FrmPaint() {
 		setResizable(false);
 		
-		PnlCrtez crtez=new PnlCrtez(this);
+		final PnlCrtez crtez=new PnlCrtez(this);
 		crtez.setBorder(new LineBorder(new Color(216, 191, 216)));
 		JToggleButton tglbtnTacka = new JToggleButton("TACKA");
 		JToggleButton tglbtnLinija = new JToggleButton("LINIJA");
@@ -75,15 +81,22 @@ public class FrmPaint extends JFrame {
 		final JLabel lblYkoo = new JLabel("");
 		lblYkoo.setForeground(new Color(204, 204, 255));
 		final JLabel lblInfo = new JLabel("");
+		lblInfo.setBorder(new LineBorder(new Color(216, 191, 216)));
 		JToggleButton tglbtnKrug = new JToggleButton("KRUG");
-		JToggleButton tglbtnBoja = new JToggleButton("BOJA");
+		JButton btnBoja = new JButton("BOJA");
 		JToggleButton tglbtnKvadrat = new JToggleButton("KVADRAT");
-		buttonGroup.add(tglbtnKvadrat);
+		btnGroupOblici.add(tglbtnKvadrat);
 		JToggleButton tglbtnPravougaonik = new JToggleButton("PRAVOUGAONIK");
-		buttonGroup.add(tglbtnPravougaonik);
+		JToggleButton tglbtnPopuni = new JToggleButton("POPUNI");
+		btnGroupAkcija.add(tglbtnPopuni);
+		JToggleButton tglbtnSelekcija = new JToggleButton("SELEKCIJA");
+		btnGroupAkcija.add(tglbtnSelekcija);
+		JToggleButton tglbtnIzbrisi = new JToggleButton("IZBRISI");
+		btnGroupAkcija.add(tglbtnIzbrisi);
+		
 		
 		crtez.setBackground(Color.WHITE);
-		crtez.setBounds(144, 11, 670, 460);
+		crtez.setBounds(164, 11, 670, 460);
 		
 		setTitle("Draw");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -94,52 +107,66 @@ public class FrmPaint extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		buttonGroup.add(tglbtnTacka);
-		tglbtnTacka.setBounds(10, 11, 121, 23);
+		btnGroupOblici.add(tglbtnTacka);
+		btnGroupOblici.add(tglbtnPravougaonik);
+		tglbtnTacka.setBounds(10, 11, 144, 23);
 		contentPane.add(tglbtnTacka);
-		buttonGroup.add(tglbtnLinija);
-		tglbtnLinija.setBounds(10, 45, 121, 23);
+		btnGroupOblici.add(tglbtnLinija);
+		tglbtnLinija.setBounds(10, 45, 144, 23);
 		contentPane.add(tglbtnLinija);
 		//crtez.removeContainerListener(null);
 		contentPane.add(crtez);
 		crtez.setLayout(null);
-		lblX.setBounds(144, 488, 15, 23);
+		lblX.setBounds(174, 488, 15, 23);
 		contentPane.add(lblX);
 
-		lblXkoo.setBounds(158, 488, 42, 23);
+		lblXkoo.setBounds(188, 488, 42, 23);
 		contentPane.add(lblXkoo);
 
-		lblY.setBounds(231, 488, 15, 23);
+		lblY.setBounds(261, 488, 15, 23);
 		contentPane.add(lblY);
 
-		lblYkoo.setBounds(249, 488, 42, 23);
+		lblYkoo.setBounds(279, 488, 42, 23);
 		contentPane.add(lblYkoo);
 		
 		
 		lblInfo.setForeground(new Color(204, 204, 255));
-		lblInfo.setBounds(310, 356, 372, 23);
+		lblInfo.setBounds(390, 488, 444, 23);
 		contentPane.add(lblInfo);
 		
 		
 		
-		buttonGroup.add(tglbtnKrug);
-		tglbtnKrug.setBounds(10, 79, 121, 23);
+		btnGroupOblici.add(tglbtnKrug);
+		tglbtnKrug.setBounds(10, 79, 144, 23);
 		contentPane.add(tglbtnKrug);
 		
 		
 		
-		tglbtnBoja.setBounds(10, 222, 121, 23);
-		contentPane.add(tglbtnBoja);
+		btnBoja.setBounds(10, 288, 144, 23);
+		contentPane.add(btnBoja);
 		
 		
 	
-		tglbtnKvadrat.setBounds(10, 113, 121, 23);
+		tglbtnKvadrat.setBounds(10, 113, 144, 23);
 		contentPane.add(tglbtnKvadrat);
 		
 		
 
-		tglbtnPravougaonik.setBounds(10, 147, 121, 23);
+		tglbtnPravougaonik.setBounds(10, 147, 144, 23);
 		contentPane.add(tglbtnPravougaonik);
+		
+
+		tglbtnPopuni.setBounds(10, 322, 144, 23);
+		contentPane.add(tglbtnPopuni);
+		
+		
+		tglbtnSelekcija.setBounds(10, 205, 144, 23);
+		contentPane.add(tglbtnSelekcija);
+		
+		
+	
+		tglbtnIzbrisi.setBounds(10, 397, 144, 23);
+		contentPane.add(tglbtnIzbrisi);
 		
 		/**
 		 * Motion Listener - ispisuje labele za x i y koordinate
@@ -187,7 +214,7 @@ public class FrmPaint extends JFrame {
 		 * JColorChooser - setovanje boje
 		 * ColorUtils - pretvara u string
 		 */
-		tglbtnBoja.addActionListener(new ActionListener() {
+		btnBoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 				ColorUtils cUtil=new ColorUtils();
@@ -195,8 +222,28 @@ public class FrmPaint extends JFrame {
 			}
 		});
 		
+		tglbtnPopuni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionStr=e.getActionCommand();
+				lblInfo.setText("Kliknuti unutar oblika da se oboji");
+				bojaUnutr=bojaStr;
+			}
+		});
 		
+		tglbtnSelekcija.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionStr=e.getActionCommand();
+				lblInfo.setText("Kliknuti unutar oblika ili na liniju za selekciju");
+			}
+		});
 		
+		tglbtnIzbrisi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionStr=e.getActionCommand();
+				lblInfo.setText("Klik na oblik koji se brise");
+
+			}
+		});
 		
 	}
 }

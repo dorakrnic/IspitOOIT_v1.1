@@ -8,6 +8,8 @@ public abstract class Oblik implements Pomerljiv {
 	protected String boja;
 	private boolean selektovan;
 	protected Color color;
+	public abstract boolean sadrzi(int x, int y) ;
+	
 	
 	public abstract void crtajSe(Graphics g);
 	
@@ -54,6 +56,6 @@ public abstract class Oblik implements Pomerljiv {
 	public void setSelektovan(boolean selektovan) {
 		this.selektovan = selektovan;
 	}
-	
+
 
 }

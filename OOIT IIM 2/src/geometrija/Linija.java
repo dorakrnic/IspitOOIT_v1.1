@@ -108,6 +108,15 @@ public class Linija extends Oblik implements Comparable{
 	}
 
 
+	@Override
+	public boolean sadrzi(int x, int y) {
+		boolean rez = false;
+		if ((pocetna.udaljenost(new Tacka (x, y)) + krajnja.udaljenost(new Tacka(x, y))) <= (this.duzina() + 0.5))
+			rez = true;
+		return rez;
+	}
+
+
 	
 	
 

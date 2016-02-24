@@ -5,12 +5,15 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
 
 public class DlgUpit extends JDialog {
@@ -84,18 +87,24 @@ public class DlgUpit extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+						boolean isNumb=false;
+						//if(!txtVisina.isVisible() && isNumber(txtRadius.getText()))
 						if(txtRadius.getText().length()>0){
-							if(s=="KRUG" || s=="KVADRAT"){
+							isNumb = isNumber(txtRadius.getText());
+							if((s=="KRUG" || s=="KVADRAT") && isNumb){
 								radius=Integer.parseInt(txtRadius.getText());
 								btnStr=e.getActionCommand();
 								dispose();
 							}
 							if(s=="PRAVOUGAONIK"){
-								radius=Integer.parseInt(txtRadius.getText());
-								visina=Integer.parseInt(txtVisina.getText());
-								btnStr=e.getActionCommand();
-								dispose();
+								isNumb=isNumb & isNumber(txtVisina.getText());
+								if(txtVisina.getText().length()>0 && isNumb){
+									radius=Integer.parseInt(txtRadius.getText());
+									visina=Integer.parseInt(txtVisina.getText());
+									btnStr=e.getActionCommand();
+									dispose();
+								}
+								
 							}
 	
 						}
@@ -116,6 +125,16 @@ public class DlgUpit extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+		}
+	}
+	
+	public boolean isNumber(String s){
+		try{
+			int n=Integer.parseInt(s);
+			return true;
+		}catch(NumberFormatException e){
+			JOptionPane.showMessageDialog(null, "Niste uneli broj", "Greska", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
 	}
 }
