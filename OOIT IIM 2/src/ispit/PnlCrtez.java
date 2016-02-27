@@ -20,9 +20,12 @@ import java.util.Iterator;
 
 public class PnlCrtez extends JPanel {
 	
-	ArrayList<Oblik> oblici = new ArrayList();
+	public static ArrayList<Oblik> oblici = new ArrayList();
 	FrmPaint frmP;
 	private int clickCounter=0;
+	public static Oblik selektovan;
+	public static int selPolozajX;
+	public static int selPolozajY;
 	/**
 	 * Create the panel.
 	 */
@@ -66,7 +69,7 @@ public class PnlCrtez extends JPanel {
 					dlg.setVisible(true);
 					if(DlgUpit.btnStr=="OK"){
 						int radius=dlg.radius;
-						Krug k=new Krug(t3,radius, FrmPaint.bojaStr, FrmPaint.bojaUnutr);
+						Krug k=new Krug(t3,radius, FrmPaint.bojaStr);
 						oblici.add(k);
 					}	
 				}
@@ -89,7 +92,6 @@ public class PnlCrtez extends JPanel {
 					}
 				}
 				
-				//na radi !!!! ?????
 				if(FrmPaint.actionStr=="POPUNI"){
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
@@ -97,27 +99,34 @@ public class PnlCrtez extends JPanel {
 						
 						if(o.sadrzi(e.getX(), e.getY())){
 							o.setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
-							oblici.add((Oblik)o);
+							o.setPopunjen(true);
 						}
 						
 					}	
 				}
 				
 				if(FrmPaint.actionStr=="SELEKCIJA"){
-					//proci kroz sve oblike , proveriti sa metodom 'sadrzi' da li je unutar oblika i taj oblik setovati na selektovan
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
 						Oblik o=(Oblik)it.next();
-						System.out.println(o.getClass().getName());
+						
 						if(o.sadrzi(e.getX(), e.getY())){
-							if(o.isSelektovan())
+							if(o.isSelektovan()){
 								o.setSelektovan(false);
-							else
+								selektovan=null;
+							}else{
 								o.setSelektovan(true);
+								selektovan=o;
+							}
+								
+						}else{
+							o.setSelektovan(false);	
+							selektovan=null;
 						}
+						
 					}
 				}
-				///obraditi exception...u listi se nalaze i objekti koji nisu tipa Oblik
+				
 				if(FrmPaint.actionStr=="IZBRISI"){
 					Iterator it = oblici.iterator();
 					
@@ -127,8 +136,11 @@ public class PnlCrtez extends JPanel {
 							if(o.sadrzi(e.getX(),e.getY())){
 								DlgPoruka dlg=new DlgPoruka();
 								dlg.setVisible(true);
-								if(dlg.btnStr=="OK")
-									oblici.remove((Oblik)o);	
+								if(dlg.btnStr=="OK"){
+									oblici.remove((Oblik)o);
+									break;
+								}
+										
 							}
 						}
 					
@@ -150,4 +162,5 @@ public class PnlCrtez extends JPanel {
 		}
 		repaint();
 	}
+	
 }

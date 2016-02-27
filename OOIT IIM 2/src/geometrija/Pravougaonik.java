@@ -36,11 +36,21 @@ public class Pravougaonik extends Kvadrat {
 		return (int)(this.povrsina() - novi.povrsina());
 	}
 	
+	public void popuni(Graphics g) {
+		g.setColor(pronadjiBoju(getBojaUnutrasnjosti()));
+		g.fillRect(getGoreLevo().getX()+1, getGoreLevo().getY()+1, getStranica()-1, visina-1);
+		
+	}
 	
 	public void crtajSe (Graphics g){
 		g.setColor(pronadjiBoju(this.getBoja()));
 		g.drawRect(getGoreLevo().getX(), getGoreLevo().getY(), getStranica(), visina);
 		
+		if(isSelektovan())
+			selektovan(g);
+		if(isPopunjen()){
+			popuni(g);
+		}
 	}
 	
 	
@@ -101,7 +111,10 @@ public class Pravougaonik extends Kvadrat {
 	public void setVisina(int novaVisina){
 		visina = novaVisina;
 
-
+	}
+	
+	public String typeToString(){
+		return "Pravougaonik";
 	}
 
 

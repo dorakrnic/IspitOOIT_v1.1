@@ -116,7 +116,9 @@ public class Linija extends Oblik implements Comparable{
 		return rez;
 	}
 
-
+	public String typeToString(){
+		return "Linija";
+	}
 	
 	
 

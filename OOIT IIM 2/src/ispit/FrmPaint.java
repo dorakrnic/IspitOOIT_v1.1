@@ -38,12 +38,14 @@ import javax.swing.JTextField;
 public class FrmPaint extends JFrame {
 
 	private JPanel contentPane;
-	private final ButtonGroup btnGroupOblici = new ButtonGroup();
+	
 	
 	public static String actionStr;
 	public static Color boja;
 	public static String bojaStr="roza";
 	public static String bojaUnutr="zuta";
+	
+	private final ButtonGroup btnGroupOblici = new ButtonGroup();
 	private final ButtonGroup btnGroupAkcija = new ButtonGroup();
 
 	/**
@@ -84,15 +86,19 @@ public class FrmPaint extends JFrame {
 		lblInfo.setBorder(new LineBorder(new Color(216, 191, 216)));
 		JToggleButton tglbtnKrug = new JToggleButton("KRUG");
 		JButton btnBoja = new JButton("BOJA");
+		btnGroupOblici.add(btnBoja);
 		JToggleButton tglbtnKvadrat = new JToggleButton("KVADRAT");
 		btnGroupOblici.add(tglbtnKvadrat);
 		JToggleButton tglbtnPravougaonik = new JToggleButton("PRAVOUGAONIK");
-		JToggleButton tglbtnPopuni = new JToggleButton("POPUNI");
-		btnGroupAkcija.add(tglbtnPopuni);
+		final JToggleButton tglbtnPopuni = new JToggleButton("POPUNI");
+		btnGroupOblici.add(tglbtnPopuni);
 		JToggleButton tglbtnSelekcija = new JToggleButton("SELEKCIJA");
-		btnGroupAkcija.add(tglbtnSelekcija);
+		btnGroupOblici.add(tglbtnSelekcija);
 		JToggleButton tglbtnIzbrisi = new JToggleButton("IZBRISI");
-		btnGroupAkcija.add(tglbtnIzbrisi);
+		btnGroupOblici.add(tglbtnIzbrisi);
+		JToggleButton tglbtnModifikacija = new JToggleButton("MODIFIKACIJA");
+		btnGroupOblici.add(tglbtnModifikacija);
+		
 		
 		
 		crtez.setBackground(Color.WHITE);
@@ -168,8 +174,13 @@ public class FrmPaint extends JFrame {
 		tglbtnIzbrisi.setBounds(10, 397, 144, 23);
 		contentPane.add(tglbtnIzbrisi);
 		
+		
+		tglbtnModifikacija.setBounds(10, 448, 144, 23);
+		contentPane.add(tglbtnModifikacija);
+		
+///////////////////////////////////////events////////////////////////////////////		
 		/**
-		 * Motion Listener - ispisuje labele za x i y koordinate
+		 * Motion Listener nad JPanel.crtez - ispisuje labele za x i y koordinate
 		 */
 		crtez.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -178,50 +189,66 @@ public class FrmPaint extends JFrame {
 				lblYkoo.setText(String.valueOf(e.getY()));
 			}
 		});
+//////////////////////////oblici//////////////////////		
 		
+		/**
+		 * button TACKA on click
+		 */
 		tglbtnTacka.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
 			}
 		});
 		
-		
+		/**
+		 * button LINIJA on click
+		 */
 		tglbtnLinija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
 			}
 		});
-		
+		/**
+		 * btn KRUG on click
+		 */
 		tglbtnKrug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
 			}
 		});
-		
+		/**
+		 * button KVADRAT on click
+		 */
 		tglbtnKvadrat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
 			}
 		});
-		
+		/**
+		 * button PRAVOUGAONIK on click
+		 */
 		tglbtnPravougaonik.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
 			}
 		});
-		
+///////////////////////boja//////////////////////////////////////////		
 		/**
 		 * JColorChooser - setovanje boje
 		 * ColorUtils - pretvara u string
 		 */
 		btnBoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				tglbtnPopuni.setFocusable(false);
 				boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 				ColorUtils cUtil=new ColorUtils();
 				bojaStr=cUtil.getColorNameFromColor(boja);
+				
 			}
 		});
-		
+		/**
+		 * button POPUNI on click - setuje boju unutrasnjosti na poslednju setovanu
+		 */
 		tglbtnPopuni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
@@ -229,21 +256,56 @@ public class FrmPaint extends JFrame {
 				bojaUnutr=bojaStr;
 			}
 		});
-		
+/////////////////////////selekcija//////////////////////////////////	
+		/**
+		 * button 	SELEKCIJA on click
+		 */
 		tglbtnSelekcija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
 				lblInfo.setText("Kliknuti unutar oblika ili na liniju za selekciju");
 			}
 		});
-		
+///////////////////brisanje////////////////////////////////////////		
+		/**
+		 * button IZBRISI on click
+		 */
 		tglbtnIzbrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
-				lblInfo.setText("Klik na oblik koji se brise");
+				lblInfo.setText("Klik na oblik koji se brise, ako nema oblika akcija se nece izvrsiti");
 
 			}
 		});
+///////////////////modifikacija//////////////////////////////////////
+		/**
+		 * button MODIFIKACIJA on click
+		 */
+		tglbtnModifikacija.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionStr=e.getActionCommand();
+				lblInfo.setText("Selektovati oblik koji se modifikuje");
+				if(PnlCrtez.selektovan!=null){
+					//otvorim dijalog panel sa setovanim vrednostima od selektovanog oblika
+					DlgModifikacija dlgM=new DlgModifikacija();
+					dlgM.setVisible(true);
+					if(PnlCrtez.selektovan.typeToString()=="Kvadrat" || PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
+						PnlCrtez.selektovan.setStranica(dlgM.sirina);
+					}else if(PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
+						PnlCrtez.selektovan.setVisina(dlgM.visina);
+					}else if(PnlCrtez.selektovan.typeToString()=="Krug"){
+						PnlCrtez.selektovan.setRadius(dlgM.sirina);
+					}else if(PnlCrtez.selektovan.typeToString()=="Linija"){
+						PnlCrtez.selektovan.setDuzina(dlgM.sirina);
+					}
+					if(PnlCrtez.selektovan.typeToString()=="Tacka"){
+						//ovde samo pomeranje moze 
+					}
+					
+				}
+			}
+		});
+		
 		
 	}
 }

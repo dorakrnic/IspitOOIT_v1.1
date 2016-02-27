@@ -112,7 +112,9 @@ boja = "";
 			return false;
 	}
 
-
+	public String typeToString(){
+		return "Tacka";
+	}
 
 
 

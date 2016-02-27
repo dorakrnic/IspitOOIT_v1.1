@@ -9,7 +9,11 @@ public abstract class Oblik implements Pomerljiv {
 	private boolean selektovan;
 	protected Color color;
 	public abstract boolean sadrzi(int x, int y) ;
-	
+	private int stranica;
+	private int visina;
+	private int radius;
+	private String type;
+	private double duzina;
 	
 	public abstract void crtajSe(Graphics g);
 	
@@ -56,6 +60,35 @@ public abstract class Oblik implements Pomerljiv {
 	public void setSelektovan(boolean selektovan) {
 		this.selektovan = selektovan;
 	}
-
+	
+	public int getStranica(){
+		return stranica;
+	}
+	public void setStranica(int stranica){
+		this.stranica=stranica;
+	}
+	public int getRadius(){
+		return stranica;
+	}
+	public void setRadius(int stranica){
+		this.radius=stranica;
+	}
+	public int getVisina(){
+		return visina;
+	}
+	public void setVisina(int visina){
+		this.visina=visina;
+	}
+	
+	public String typeToString(){
+		return type;
+	}
+	
+	public double duzina(){
+		return duzina;
+	}
+	public void setDuzina(int duzina){
+		this.duzina=duzina;
+	}
 
 }

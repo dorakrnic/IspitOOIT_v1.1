@@ -44,7 +44,7 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 	public void popuni(Graphics g) {
 		g.setColor(pronadjiBoju(getBojaUnutrasnjosti()));
 		g.fillOval(getCentar().getX()-radius+1, getCentar().getY() - radius+1, radius*2-2, 2*radius-2 );
-
+		
 	}
 
 
@@ -62,9 +62,13 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 	public void crtajSe(Graphics g){
 		g.setColor(pronadjiBoju(getBoja()));
 		g.drawOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
+		//g.fillOval(getCentar().getX()-radius, getCentar().getY() - radius, radius*2, 2*radius );
 		
 		if(isSelektovan())
 			selektovan(g);
+		if(isPopunjen()){
+			popuni(g);
+		}
 	}
 
 
@@ -116,6 +120,9 @@ public class Krug extends PovrsinskiOblik implements Comparable{
 		this.radius = radius;
 	}
 
+	public String typeToString(){
+		return "Krug";
+	}
 	
 
 

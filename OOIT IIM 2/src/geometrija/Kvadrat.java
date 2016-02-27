@@ -58,6 +58,9 @@ public class Kvadrat extends PovrsinskiOblik implements Comparable{
 		String kvadrat = "Gornji levi ugao = (" + goreLevo.getX() + "," + goreLevo.getY() + "), stranica = " + getStranica();
 		return kvadrat;
 	}
+	public String typeToString(){
+		return "Kvadrat";
+	}
 	
 	public void crtajSe(Graphics g){
 		g.setColor(pronadjiBoju(getBoja()));
@@ -65,6 +68,9 @@ public class Kvadrat extends PovrsinskiOblik implements Comparable{
 		
 		if(isSelektovan())
 			selektovan(g);
+		if(isPopunjen()){
+			popuni(g);
+		}
 		
 	}
 	
