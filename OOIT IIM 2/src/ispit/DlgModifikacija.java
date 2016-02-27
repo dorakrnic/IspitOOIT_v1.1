@@ -1,5 +1,7 @@
 package ispit;
 
+import geometrija.*;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
@@ -20,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+
 import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
 
@@ -113,9 +116,12 @@ public class DlgModifikacija extends JDialog {
 		JLabel label_2 = new JLabel("Y:");
 		label_2.setBounds(135, 340, 10, 14);
 		
+		final JButton okButton = new JButton("OK");
+		
 		txtPomeriNaX = new JTextField();
 		txtPomeriNaX.setBounds(172, 232, 51, 20);
 		txtPomeriNaX.setColumns(10);
+		txtPomeriNaX.setEnabled(false);
 		contentPanel.setLayout(null);
 		contentPanel.add(separator);
 		contentPanel.add(separator_1);
@@ -135,16 +141,19 @@ public class DlgModifikacija extends JDialog {
 		txtPomeriNaY = new JTextField();
 		txtPomeriNaY.setColumns(10);
 		txtPomeriNaY.setBounds(172, 257, 51, 20);
+		txtPomeriNaY.setEnabled(false);
 		contentPanel.add(txtPomeriNaY);
 		
 		txtPomeriZaX = new JTextField();
 		txtPomeriZaX.setColumns(10);
 		txtPomeriZaX.setBounds(172, 305, 51, 20);
+		txtPomeriZaX.setEnabled(false);
 		contentPanel.add(txtPomeriZaX);
 		
 		txtPomeriZaY = new JTextField();
 		txtPomeriZaY.setColumns(10);
 		txtPomeriZaY.setBounds(172, 337, 51, 20);
+		txtPomeriZaY.setEnabled(false);
 		contentPanel.add(txtPomeriZaY);
 		
 		JLabel lblNoveVrednosti = new JLabel("Nove vrednosti");
@@ -152,6 +161,20 @@ public class DlgModifikacija extends JDialog {
 		lblNoveVrednosti.setBounds(50, 11, 183, 14);
 		contentPanel.add(lblNoveVrednosti);
 		
+		txtPomeriNaX.setText("0");
+		txtPomeriNaY.setText("0");
+		txtPomeriZaX.setText("0");
+		txtPomeriZaY.setText("0");
+		
+		if(type=="Tacka"){
+			txtNovaSirina.setVisible(false);
+			lblSirina.setVisible(false);
+			txtNovaVisina.setVisible(false);
+			lblVisina.setVisible(false);
+			txtPomeriNaX.setText(String.valueOf(((Tacka) PnlCrtez.selektovan).getX()));
+			txtPomeriNaY.setText(String.valueOf(((Tacka) PnlCrtez.selektovan).getY()));
+			
+		}
 		if(type=="Kvadrat"|| type=="Pravougaonik"){
 			txtNovaSirina.setText(String.valueOf(PnlCrtez.selektovan.getStranica()));
 			sirina=PnlCrtez.selektovan.getStranica();
@@ -174,10 +197,7 @@ public class DlgModifikacija extends JDialog {
 			sirina=PnlCrtez.selektovan.getRadius();
 			
 		}
-		txtPomeriNaX.setText("0");
-		txtPomeriNaY.setText("0");
-		txtPomeriZaX.setText("0");
-		txtPomeriZaY.setText("0");
+		
 		
 		final JCheckBox chbPomeriNa = new JCheckBox("Pomeri na:");
 		buttonGroup.add(chbPomeriNa);
@@ -192,15 +212,20 @@ public class DlgModifikacija extends JDialog {
 		contentPanel.add(chbPomeriZa);
 		
 		
-		////events////
+		////EVENTS////
 		//proveravaju se sva polja na focus out da li su brojevi
 		txtNovaSirina.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
+				isNumb=true;
 				isNumb=isNumb & isNumber(txtNovaSirina.getText());
 				if(txtNovaSirina.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Vrednost ce ostati nepromenjena", "Potrda", JOptionPane.INFORMATION_MESSAGE);
 					txtNovaSirina.setText(String.valueOf(sirina));
 				}
+				if(!isNumb)
+					okButton.setEnabled(false);
+				else
+					okButton.setEnabled(true);
 			}
 		});
 		txtNovaVisina.addFocusListener(new FocusAdapter() {
@@ -208,14 +233,77 @@ public class DlgModifikacija extends JDialog {
 				isNumb=isNumb & isNumber(txtNovaVisina.getText());
 				if(txtNovaVisina.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Visina ce ostati nepromenjena", "Potrda", JOptionPane.INFORMATION_MESSAGE);
-					txtNovaVisina.setText("0");
+					txtNovaVisina.setText(String.valueOf(visina));
 				}
+				if(!isNumb)
+					okButton.setEnabled(false);
+				else
+					okButton.setEnabled(true);
+			}
+		});
+		
+		txtPomeriNaX.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				isNumb=isNumb & isNumber(txtPomeriNaX.getText());
+				if(txtPomeriNaX.getText().length()==0){
+					JOptionPane.showMessageDialog(null, "Postavljam X=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+					txtPomeriNaX.setText("0");
+				}
+				if(!isNumb)
+					okButton.setEnabled(false);
+				else
+					okButton.setEnabled(true);
+			}
+		});
+		
+		txtPomeriNaY.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				isNumb=isNumb & isNumber(txtPomeriNaX.getText());
+				if(txtPomeriNaY.getText().length()==0){
+					JOptionPane.showMessageDialog(null, "Postavljam Y=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+					txtPomeriNaY.setText("0");
+				}
+				if(!isNumb)
+					okButton.setEnabled(false);
+				else
+					okButton.setEnabled(true);
+			}
+		});
+		
+		txtPomeriZaX.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				isNumb=isNumb & isNumber(txtPomeriZaX.getText());
+				if(txtPomeriZaX.getText().length()==0){
+					JOptionPane.showMessageDialog(null, "Postavljam X=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+					txtPomeriZaX.setText("0");
+				}
+				if(!isNumb)
+					okButton.setEnabled(false);
+				else
+					okButton.setEnabled(true);
+			}
+		});
+		
+		txtPomeriZaY.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				isNumb=isNumb & isNumber(txtPomeriZaY.getText());
+				if(txtPomeriZaY.getText().length()==0){
+					JOptionPane.showMessageDialog(null, "Postavljam Y=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+					txtPomeriZaY.setText("0");
+				}
+				if(!isNumb)
+					okButton.setEnabled(false);
+				else
+					okButton.setEnabled(true);
+				
 			}
 		});
 		
 		chbPomeriNa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chbPomeriNa.isSelected()){
+					txtPomeriNaX.setEnabled(true);
+					txtPomeriNaY.setEnabled(true);
 					txtPomeriZaX.setEnabled(false);
 					txtPomeriZaY.setEnabled(false);
 				}
@@ -227,6 +315,8 @@ public class DlgModifikacija extends JDialog {
 				if(chbPomeriZa.isSelected()){
 					txtPomeriNaX.setEnabled(false);
 					txtPomeriNaY.setEnabled(false);
+					txtPomeriZaX.setEnabled(true);
+					txtPomeriZaY.setEnabled(true);
 				}
 			}
 		});
@@ -236,14 +326,11 @@ public class DlgModifikacija extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
+				
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-				if(!isNumb)
-					okButton.setEnabled(false);
-				else
-					okButton.setEnabled(true);
+
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//sirina ce biti za kvadrat i pravougaonik, za krug ce radius uzeti ovu sirinu, za liniju sirina ce biti duzina
@@ -260,6 +347,36 @@ public class DlgModifikacija extends JDialog {
 							if(type=="Pravougaonik"){
 								visina=Integer.parseInt(txtNovaVisina.getText());
 							}
+							if(chbPomeriNa.isSelected()){
+								pozicijaX=Integer.parseInt(txtPomeriNaX.getText());
+								pozicijaY=Integer.parseInt(txtPomeriNaY.getText());
+								if(type=="Tacka")
+									((Tacka) PnlCrtez.selektovan).pomeriNa(pozicijaX, pozicijaY);
+								if(type=="Linija")
+									((Linija) PnlCrtez.selektovan).pomeriNa(pozicijaX, pozicijaY);
+								if(type=="Krug")
+									((Krug) PnlCrtez.selektovan).pomeriNa(pozicijaX, pozicijaY);
+								if(type=="Kvadrat")
+									((Kvadrat) PnlCrtez.selektovan).pomeriNa(pozicijaX, pozicijaY);
+								if(type=="Pravougaonik")
+									((Pravougaonik) PnlCrtez.selektovan).pomeriNa(pozicijaX, pozicijaY);
+							}
+							if(chbPomeriZa.isSelected()){
+								pozicijaX=Integer.parseInt(txtPomeriZaX.getText());
+								pozicijaY=Integer.parseInt(txtPomeriZaY.getText());
+								if(type=="Tacka")
+									((Tacka) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
+								if(type=="Linija")
+									((Linija) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
+								if(type=="Krug")
+									((Krug) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
+								if(type=="Kvadrat")
+									((Kvadrat) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
+								if(type=="Pravougaonik")
+									((Pravougaonik) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
+							
+							}
+							
 							dispose();
 						}
 

@@ -95,14 +95,21 @@ public class PnlCrtez extends JPanel {
 				if(FrmPaint.actionStr=="POPUNI"){
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
-						PovrsinskiOblik o=(PovrsinskiOblik)it.next();
+						try{
+							//mora jer linija i tacka nisu povrsinski oblici pa baca exception
+							PovrsinskiOblik o=(PovrsinskiOblik)it.next();
 						
-						if(o.sadrzi(e.getX(), e.getY())){
-							o.setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
-							o.setPopunjen(true);
+							if(o.sadrzi(e.getX(), e.getY())){
+								o.setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								o.setPopunjen(true);
+							}
+							
+						}catch(Exception ex){
+						
 						}
-						
 					}	
+						
+						
 				}
 				
 				if(FrmPaint.actionStr=="SELEKCIJA"){

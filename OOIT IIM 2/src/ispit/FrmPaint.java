@@ -1,6 +1,7 @@
 package ispit;
 
 import geometrija.Oblik;
+import geometrija.Tacka;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -83,7 +84,7 @@ public class FrmPaint extends JFrame {
 		final JLabel lblYkoo = new JLabel("");
 		lblYkoo.setForeground(new Color(204, 204, 255));
 		final JLabel lblInfo = new JLabel("");
-		lblInfo.setBorder(new LineBorder(new Color(216, 191, 216)));
+		lblInfo.setBorder(null);
 		JToggleButton tglbtnKrug = new JToggleButton("KRUG");
 		JButton btnBoja = new JButton("BOJA");
 		btnGroupOblici.add(btnBoja);
@@ -98,7 +99,7 @@ public class FrmPaint extends JFrame {
 		btnGroupOblici.add(tglbtnIzbrisi);
 		JToggleButton tglbtnModifikacija = new JToggleButton("MODIFIKACIJA");
 		btnGroupOblici.add(tglbtnModifikacija);
-		
+		JToggleButton tglbtnIzbrisiSve = new JToggleButton("IZBRISI SVE");
 		
 		
 		crtez.setBackground(Color.WHITE);
@@ -171,12 +172,18 @@ public class FrmPaint extends JFrame {
 		
 		
 	
-		tglbtnIzbrisi.setBounds(10, 397, 144, 23);
+		tglbtnIzbrisi.setBounds(10, 377, 144, 23);
 		contentPane.add(tglbtnIzbrisi);
 		
 		
 		tglbtnModifikacija.setBounds(10, 448, 144, 23);
 		contentPane.add(tglbtnModifikacija);
+		
+		
+	
+		btnGroupOblici.add(tglbtnIzbrisiSve);
+		tglbtnIzbrisiSve.setBounds(10, 411, 144, 23);
+		contentPane.add(tglbtnIzbrisiSve);
 		
 ///////////////////////////////////////events////////////////////////////////////		
 		/**
@@ -239,7 +246,7 @@ public class FrmPaint extends JFrame {
 		 */
 		btnBoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				tglbtnPopuni.setFocusable(false);
+				//tglbtnPopuni.setFocusable(false);
 				boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 				ColorUtils cUtil=new ColorUtils();
 				bojaStr=cUtil.getColorNameFromColor(boja);
@@ -252,7 +259,7 @@ public class FrmPaint extends JFrame {
 		tglbtnPopuni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
-				lblInfo.setText("Kliknuti unutar oblika da se oboji");
+				lblInfo.setText("Kliknuti unutar povrsinskog oblika da se oboji");
 				bojaUnutr=bojaStr;
 			}
 		});
@@ -277,6 +284,23 @@ public class FrmPaint extends JFrame {
 
 			}
 		});
+		
+		tglbtnIzbrisiSve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(PnlCrtez.oblici.size()==0){
+					JOptionPane.showMessageDialog(null, "Nema oblika za brisanje", "Poruka", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else{
+					DlgPoruka dlgP=new DlgPoruka();
+					dlgP.setVisible(true);
+					if(dlgP.btnStr=="OK"){	
+						PnlCrtez.oblici.clear();
+					}
+				}
+				
+			}
+		});
 ///////////////////modifikacija//////////////////////////////////////
 		/**
 		 * button MODIFIKACIJA on click
@@ -297,9 +321,6 @@ public class FrmPaint extends JFrame {
 						PnlCrtez.selektovan.setRadius(dlgM.sirina);
 					}else if(PnlCrtez.selektovan.typeToString()=="Linija"){
 						PnlCrtez.selektovan.setDuzina(dlgM.sirina);
-					}
-					if(PnlCrtez.selektovan.typeToString()=="Tacka"){
-						//ovde samo pomeranje moze 
 					}
 					
 				}

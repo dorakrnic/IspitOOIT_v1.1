@@ -18,12 +18,14 @@ public abstract class Oblik implements Pomerljiv {
 	public abstract void crtajSe(Graphics g);
 	
 	public static Color pronadjiBoju(String boja){
-		if(boja.equalsIgnoreCase("bela")||boja.equalsIgnoreCase("white"))
+		if(boja.equalsIgnoreCase("bela")||boja.equalsIgnoreCase("white")||boja.equalsIgnoreCase("WhiteSmoke"))
 			return Color.white;
 		else if(boja.equalsIgnoreCase("zuta")||boja.equalsIgnoreCase("yellow"))
 			return Color.yellow;
 		else if(boja.equalsIgnoreCase("zelena")||boja.equalsIgnoreCase("green"))
 			return Color.green;
+		else if(boja.equalsIgnoreCase("YellowGreen"))
+			return Color.green.brighter();
 		else if(boja.equalsIgnoreCase("crvena")||boja.equalsIgnoreCase("red"))
 			return Color.red;
 		else if(boja.equalsIgnoreCase("plava")||boja.equalsIgnoreCase("blue"))
@@ -32,6 +34,7 @@ public abstract class Oblik implements Pomerljiv {
 			return Color.magenta;
 		else if(boja.equalsIgnoreCase("ljubicasta")||boja.equalsIgnoreCase("violet")||boja.equalsIgnoreCase("darkviolet"))
 			return Color.magenta.darker();
+		
 		else
 			return Color.black;
 	}

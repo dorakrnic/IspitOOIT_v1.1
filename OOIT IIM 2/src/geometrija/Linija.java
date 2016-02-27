@@ -101,9 +101,11 @@ public class Linija extends Oblik implements Comparable{
 	}
 
 
-	@Override
+	
 	public void pomeriNa(int x, int y) {
-		
+		pocetna.pomeriNa(x, y);
+		krajnja.setX(krajnja.getX()-(pocetna.getX()-x));
+		krajnja.setY(krajnja.getY()-(pocetna.getY()-y));
 		
 	}
 
