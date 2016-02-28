@@ -138,17 +138,22 @@ public class PnlCrtez extends JPanel {
 					Iterator it = oblici.iterator();
 					
 						while(it.hasNext()){
-							Oblik o=(Oblik)it.next();
-							
-							if(o.sadrzi(e.getX(),e.getY())){
-								DlgPoruka dlg=new DlgPoruka();
-								dlg.setVisible(true);
-								if(dlg.btnStr=="OK"){
-									oblici.remove((Oblik)o);
-									break;
+							try{
+								Oblik o=(Oblik)it.next();
+								
+								if(o.sadrzi(e.getX(),e.getY())){
+									DlgPoruka dlg=new DlgPoruka();
+									dlg.setVisible(true);
+									if(dlg.btnStr=="OK"){
+										oblici.remove((Oblik)o);
+										break;
+									}
+											
 								}
-										
+							}catch(Exception ex){
+								
 							}
+						
 						}
 					
 				}

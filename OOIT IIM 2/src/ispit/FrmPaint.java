@@ -39,16 +39,25 @@ public class FrmPaint extends JFrame {
 
 	private JPanel contentPane;
 	
-	
+	/**
+	 * cuva naziv akcije - button clicked
+	 */
 	public static String actionStr;
 	public static Color boja;
+	/**
+	 * bojaStr --> boja ivice
+	 */
 	public static String bojaStr="roza";
+	/**
+	 * bojaUnutr --> boja povrsine
+	 */
 	public static String bojaUnutr="zuta";
 	
 	private final ButtonGroup btnGroupOblici = new ButtonGroup();
 	private final ButtonGroup btnGroupAkcija = new ButtonGroup();
 
 	/**
+	 * @author Isidora Krnic-Otic
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -82,7 +91,7 @@ public class FrmPaint extends JFrame {
 		lblY.setForeground(Color.WHITE);
 		final JLabel lblYkoo = new JLabel("");
 		lblYkoo.setForeground(Color.WHITE);
-		final JLabel lblInfo = new JLabel("");
+		final JLabel lblInfo = new JLabel("Boja: " +bojaStr);
 		lblInfo.setBorder(null);
 		JToggleButton tglbtnKrug = new JToggleButton("KRUG");
 		JToggleButton tglbtnBoja = new JToggleButton("BOJA");
