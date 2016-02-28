@@ -3,9 +3,11 @@ package ispit;
 import geometrija.*;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,7 +29,7 @@ import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
 
 public class DlgModifikacija extends JDialog {
-
+	private JPanel contentPane;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtNovaSirina;
 	private JTextField txtNovaVisina;
@@ -78,8 +80,9 @@ public class DlgModifikacija extends JDialog {
 		lblVisina.setBounds(16, 186, 88, 14);
 		lblVisina.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JButton btnNewButton = new JButton("Boja ivice");
-		btnNewButton.setBounds(66, 37, 157, 23);
+		JButton btnBojaIvice = new JButton("Boja ivice");
+
+		btnBojaIvice.setBounds(66, 37, 157, 23);
 		
 		JButton btnBojaUnutrasnjosti = new JButton("Boja unutrasnjosti");
 		btnBojaUnutrasnjosti.setBounds(66, 86, 157, 23);
@@ -130,7 +133,7 @@ public class DlgModifikacija extends JDialog {
 		contentPanel.add(txtPomeriNaX);
 		contentPanel.add(label);
 		contentPanel.add(btnBojaUnutrasnjosti);
-		contentPanel.add(btnNewButton);
+		contentPanel.add(btnBojaIvice);
 		contentPanel.add(txtNovaSirina);
 		contentPanel.add(lblX);
 		contentPanel.add(txtNovaVisina);
@@ -167,6 +170,8 @@ public class DlgModifikacija extends JDialog {
 		txtPomeriZaY.setText("0");
 		
 		if(type=="Tacka"){
+			btnBojaUnutrasnjosti.setVisible(false);
+			btnBojaIvice.setText("Boja");
 			txtNovaSirina.setVisible(false);
 			lblSirina.setVisible(false);
 			txtNovaVisina.setVisible(false);
@@ -299,6 +304,24 @@ public class DlgModifikacija extends JDialog {
 			}
 		});
 		
+		btnBojaIvice.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+				ColorUtils cUtil=new ColorUtils();
+				FrmPaint.bojaStr=cUtil.getColorNameFromColor(FrmPaint.boja);
+				
+			}
+		});
+		
+		btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+				ColorUtils cUtil=new ColorUtils();
+				FrmPaint.bojaUnutr=cUtil.getColorNameFromColor(FrmPaint.boja);
+				
+			}
+		});
+		
 		chbPomeriNa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(chbPomeriNa.isSelected()){
@@ -366,6 +389,7 @@ public class DlgModifikacija extends JDialog {
 								pozicijaY=Integer.parseInt(txtPomeriZaY.getText());
 								if(type=="Tacka")
 									((Tacka) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
+									((Tacka) PnlCrtez.selektovan).setBoja(FrmPaint.bojaStr);
 								if(type=="Linija")
 									((Linija) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
 								if(type=="Krug")

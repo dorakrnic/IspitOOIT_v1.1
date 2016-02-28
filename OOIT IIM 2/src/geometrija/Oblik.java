@@ -22,9 +22,9 @@ public abstract class Oblik implements Pomerljiv {
 			return Color.white;
 		else if(boja.equalsIgnoreCase("zuta")||boja.equalsIgnoreCase("yellow"))
 			return Color.yellow;
-		else if(boja.equalsIgnoreCase("zelena")||boja.equalsIgnoreCase("green"))
+		else if(boja.equalsIgnoreCase("zelena")||boja.equalsIgnoreCase("green") || boja.equalsIgnoreCase("ForestGreen"))
 			return Color.green;
-		else if(boja.equalsIgnoreCase("YellowGreen"))
+		else if(boja.equalsIgnoreCase("YellowGreen")||boja.equalsIgnoreCase("Lime"))
 			return Color.green.brighter();
 		else if(boja.equalsIgnoreCase("crvena")||boja.equalsIgnoreCase("red"))
 			return Color.red;
@@ -34,7 +34,20 @@ public abstract class Oblik implements Pomerljiv {
 			return Color.magenta;
 		else if(boja.equalsIgnoreCase("ljubicasta")||boja.equalsIgnoreCase("violet")||boja.equalsIgnoreCase("darkviolet"))
 			return Color.magenta.darker();
-		
+		else if(boja.equalsIgnoreCase("DarkTurquoise")|| boja.equalsIgnoreCase("Turquoise"))
+			return Color.cyan;
+		else if(boja.equalsIgnoreCase("DarkCyan") || boja.equalsIgnoreCase("Teal"))
+			return Color.cyan.darker();
+		else if(boja.equalsIgnoreCase("Aquamarine"))
+			return Color.cyan.brighter();
+		else if(boja.equalsIgnoreCase("Gray")|| boja.equalsIgnoreCase("DarkGray"))
+			return Color.gray;
+		else if(boja.equalsIgnoreCase("LightGray") || boja.equalsIgnoreCase("Silver"))
+			return Color.gray.brighter();
+		else if(boja.equalsIgnoreCase("Olive"))
+			return Color.green.darker();
+		else if(boja.equalsIgnoreCase("Orange")|| boja.equalsIgnoreCase("narandzasta"))
+			return Color.orange;
 		else
 			return Color.black;
 	}

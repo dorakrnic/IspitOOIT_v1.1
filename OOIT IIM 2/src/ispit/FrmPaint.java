@@ -1,7 +1,6 @@
 package ispit;
 
-import geometrija.Oblik;
-import geometrija.Tacka;
+import geometrija.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -76,18 +75,18 @@ public class FrmPaint extends JFrame {
 		JToggleButton tglbtnTacka = new JToggleButton("TACKA");
 		JToggleButton tglbtnLinija = new JToggleButton("LINIJA");
 		JLabel lblX = new JLabel("X:");
-		lblX.setForeground(new Color(204, 204, 255));
+		lblX.setForeground(Color.WHITE);
 		final JLabel lblXkoo = new JLabel("");
-		lblXkoo.setForeground(new Color(204, 204, 255));
+		lblXkoo.setForeground(Color.WHITE);
 		JLabel lblY = new JLabel("Y:");
-		lblY.setForeground(new Color(204, 204, 255));
+		lblY.setForeground(Color.WHITE);
 		final JLabel lblYkoo = new JLabel("");
-		lblYkoo.setForeground(new Color(204, 204, 255));
+		lblYkoo.setForeground(Color.WHITE);
 		final JLabel lblInfo = new JLabel("");
 		lblInfo.setBorder(null);
 		JToggleButton tglbtnKrug = new JToggleButton("KRUG");
-		JButton btnBoja = new JButton("BOJA");
-		btnGroupOblici.add(btnBoja);
+		JToggleButton tglbtnBoja = new JToggleButton("BOJA");
+		btnGroupOblici.add(tglbtnBoja);
 		JToggleButton tglbtnKvadrat = new JToggleButton("KVADRAT");
 		btnGroupOblici.add(tglbtnKvadrat);
 		JToggleButton tglbtnPravougaonik = new JToggleButton("PRAVOUGAONIK");
@@ -109,7 +108,7 @@ public class FrmPaint extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 550);
 		contentPane = new JPanel();
-		contentPane.setBackground(SystemColor.controlDkShadow);
+		contentPane.setBackground(Color.DARK_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -137,7 +136,7 @@ public class FrmPaint extends JFrame {
 		contentPane.add(lblYkoo);
 		
 		
-		lblInfo.setForeground(new Color(204, 204, 255));
+		lblInfo.setForeground(Color.WHITE);
 		lblInfo.setBounds(390, 488, 444, 23);
 		contentPane.add(lblInfo);
 		
@@ -149,8 +148,8 @@ public class FrmPaint extends JFrame {
 		
 		
 		
-		btnBoja.setBounds(10, 288, 144, 23);
-		contentPane.add(btnBoja);
+		tglbtnBoja.setBounds(10, 288, 144, 23);
+		contentPane.add(tglbtnBoja);
 		
 		
 	
@@ -204,6 +203,7 @@ public class FrmPaint extends JFrame {
 		tglbtnTacka.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
+				lblInfo.setText("");
 			}
 		});
 		
@@ -213,6 +213,7 @@ public class FrmPaint extends JFrame {
 		tglbtnLinija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
+				lblInfo.setText("");
 			}
 		});
 		/**
@@ -221,6 +222,7 @@ public class FrmPaint extends JFrame {
 		tglbtnKrug.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
+				lblInfo.setText("");
 			}
 		});
 		/**
@@ -229,6 +231,7 @@ public class FrmPaint extends JFrame {
 		tglbtnKvadrat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
+				lblInfo.setText("");
 			}
 		});
 		/**
@@ -237,6 +240,7 @@ public class FrmPaint extends JFrame {
 		tglbtnPravougaonik.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actionStr=e.getActionCommand();
+				lblInfo.setText("");
 			}
 		});
 ///////////////////////boja//////////////////////////////////////////		
@@ -244,12 +248,12 @@ public class FrmPaint extends JFrame {
 		 * JColorChooser - setovanje boje
 		 * ColorUtils - pretvara u string
 		 */
-		btnBoja.addActionListener(new ActionListener() {
+		tglbtnBoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//tglbtnPopuni.setFocusable(false);
 				boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 				ColorUtils cUtil=new ColorUtils();
 				bojaStr=cUtil.getColorNameFromColor(boja);
+				lblInfo.setText("Boja: " +bojaStr);
 				
 			}
 		});
@@ -269,6 +273,9 @@ public class FrmPaint extends JFrame {
 		 */
 		tglbtnSelekcija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(PnlCrtez.oblici.size()==0){
+					JOptionPane.showMessageDialog(null, "Nema oblika za selekciju", "Poruka", JOptionPane.INFORMATION_MESSAGE);
+				}
 				actionStr=e.getActionCommand();
 				lblInfo.setText("Kliknuti unutar oblika ili na liniju za selekciju");
 			}
@@ -279,6 +286,9 @@ public class FrmPaint extends JFrame {
 		 */
 		tglbtnIzbrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(PnlCrtez.oblici.size()==0){
+					JOptionPane.showMessageDialog(null, "Nema oblika za brisanje", "Poruka", JOptionPane.INFORMATION_MESSAGE);
+				}
 				actionStr=e.getActionCommand();
 				lblInfo.setText("Klik na oblik koji se brise, ako nema oblika akcija se nece izvrsiti");
 
@@ -287,7 +297,7 @@ public class FrmPaint extends JFrame {
 		
 		tglbtnIzbrisiSve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				lblInfo.setText("");
 				if(PnlCrtez.oblici.size()==0){
 					JOptionPane.showMessageDialog(null, "Nema oblika za brisanje", "Poruka", JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -307,22 +317,33 @@ public class FrmPaint extends JFrame {
 		 */
 		tglbtnModifikacija.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(PnlCrtez.oblici.size()==0){
+					JOptionPane.showMessageDialog(null, "Nema oblika za modifikaciju", "Poruka", JOptionPane.INFORMATION_MESSAGE);
+				}
 				actionStr=e.getActionCommand();
 				lblInfo.setText("Selektovati oblik koji se modifikuje");
 				if(PnlCrtez.selektovan!=null){
 					//otvorim dijalog panel sa setovanim vrednostima od selektovanog oblika
 					DlgModifikacija dlgM=new DlgModifikacija();
 					dlgM.setVisible(true);
-					if(PnlCrtez.selektovan.typeToString()=="Kvadrat" || PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
+					if(PnlCrtez.selektovan.typeToString()=="Kvadrat"){
 						PnlCrtez.selektovan.setStranica(dlgM.sirina);
+						PnlCrtez.selektovan.setBoja(bojaStr);
+						((Kvadrat)PnlCrtez.selektovan).setBojaUnutrasnjosti(bojaUnutr);
 					}else if(PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
+						PnlCrtez.selektovan.setStranica(dlgM.sirina);
 						PnlCrtez.selektovan.setVisina(dlgM.visina);
+						PnlCrtez.selektovan.setBoja(bojaStr);
+						((Pravougaonik)PnlCrtez.selektovan).setBojaUnutrasnjosti(bojaUnutr);
 					}else if(PnlCrtez.selektovan.typeToString()=="Krug"){
 						PnlCrtez.selektovan.setRadius(dlgM.sirina);
+						PnlCrtez.selektovan.setBoja(bojaStr);
+						((Krug)PnlCrtez.selektovan).setBojaUnutrasnjosti(bojaUnutr);
 					}else if(PnlCrtez.selektovan.typeToString()=="Linija"){
 						PnlCrtez.selektovan.setDuzina(dlgM.sirina);
+						PnlCrtez.selektovan.setBoja(bojaStr);
 					}
-					
+					//Tacka je modifikovana u DlgModifikacija
 				}
 			}
 		});
