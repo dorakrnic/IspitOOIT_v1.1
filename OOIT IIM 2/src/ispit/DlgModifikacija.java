@@ -46,6 +46,7 @@ public class DlgModifikacija extends JDialog {
 	public int pozicijaX;
 	public int pozicijaY;
 	boolean isNumb=true;
+	boolean isIspuni=false;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 	/**
@@ -306,6 +307,11 @@ public class DlgModifikacija extends JDialog {
 		
 		btnBojaIvice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try{
+					
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null, "Boja nije izmenjena! Trenutna: " +FrmPaint.bojaStr, "Poruka", JOptionPane.INFORMATION_MESSAGE);
+				}
 				FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
 				ColorUtils cUtil=new ColorUtils();
 				FrmPaint.bojaStr=cUtil.getColorNameFromColor(FrmPaint.boja);
@@ -315,9 +321,18 @@ public class DlgModifikacija extends JDialog {
 		
 		btnBojaUnutrasnjosti.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
-				ColorUtils cUtil=new ColorUtils();
-				FrmPaint.bojaUnutr=cUtil.getColorNameFromColor(FrmPaint.boja);
+				try{
+					String tempBoja=FrmPaint.bojaUnutr;
+					FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					ColorUtils cUtil=new ColorUtils();
+					FrmPaint.bojaUnutr=cUtil.getColorNameFromColor(FrmPaint.boja);
+					if(tempBoja!=FrmPaint.bojaUnutr)
+						isIspuni=true;
+					else
+						isIspuni=false;
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null, "Boja nije izmenjena, oblik se nece popuniti", "Poruka", JOptionPane.INFORMATION_MESSAGE);				
+				}
 				
 			}
 		});
@@ -365,11 +380,32 @@ public class DlgModifikacija extends JDialog {
 						else{
 							if(type!="Tacka"){
 								sirina=Integer.parseInt(txtNovaSirina.getText());
-								
+							}
+							if(type=="Kvadrat"){
+								((Kvadrat)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								if(isIspuni)
+									((Kvadrat)PnlCrtez.selektovan).setPopunjen(true);
+								else
+									((Kvadrat)PnlCrtez.selektovan).setPopunjen(false);
 							}
 							if(type=="Pravougaonik"){
 								visina=Integer.parseInt(txtNovaVisina.getText());
+								((Pravougaonik)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								if(isIspuni)
+									((Pravougaonik)PnlCrtez.selektovan).setPopunjen(true);
+								else
+									((Pravougaonik)PnlCrtez.selektovan).setPopunjen(false);
 							}
+							if(type=="Krug"){
+								((Krug)PnlCrtez.selektovan).setBojaUnutrasnjosti(FrmPaint.bojaUnutr);
+								if(isIspuni)
+									((Krug)PnlCrtez.selektovan).setPopunjen(true);
+								else
+									((Krug)PnlCrtez.selektovan).setPopunjen(false);
+							}	
+							if(type=="Tacka")
+								((Tacka) PnlCrtez.selektovan).setBoja(FrmPaint.bojaStr);
+							
 							if(chbPomeriNa.isSelected()){
 								pozicijaX=Integer.parseInt(txtPomeriNaX.getText());
 								pozicijaY=Integer.parseInt(txtPomeriNaY.getText());
@@ -389,7 +425,6 @@ public class DlgModifikacija extends JDialog {
 								pozicijaY=Integer.parseInt(txtPomeriZaY.getText());
 								if(type=="Tacka")
 									((Tacka) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
-									((Tacka) PnlCrtez.selektovan).setBoja(FrmPaint.bojaStr);
 								if(type=="Linija")
 									((Linija) PnlCrtez.selektovan).pomeriZa(pozicijaX, pozicijaY);
 								if(type=="Krug")

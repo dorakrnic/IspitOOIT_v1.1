@@ -250,11 +250,14 @@ public class FrmPaint extends JFrame {
 		 */
 		tglbtnBoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
-				ColorUtils cUtil=new ColorUtils();
-				bojaStr=cUtil.getColorNameFromColor(boja);
-				lblInfo.setText("Boja: " +bojaStr);
-				
+				try{
+					boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					ColorUtils cUtil=new ColorUtils();
+					bojaStr=cUtil.getColorNameFromColor(boja);
+					lblInfo.setText("Boja: " +bojaStr);
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(null, "Boja nije izmenjena!", "Poruka", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 		});
 		/**
@@ -329,16 +332,13 @@ public class FrmPaint extends JFrame {
 					if(PnlCrtez.selektovan.typeToString()=="Kvadrat"){
 						PnlCrtez.selektovan.setStranica(dlgM.sirina);
 						PnlCrtez.selektovan.setBoja(bojaStr);
-						((Kvadrat)PnlCrtez.selektovan).setBojaUnutrasnjosti(bojaUnutr);
 					}else if(PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
 						PnlCrtez.selektovan.setStranica(dlgM.sirina);
 						PnlCrtez.selektovan.setVisina(dlgM.visina);
 						PnlCrtez.selektovan.setBoja(bojaStr);
-						((Pravougaonik)PnlCrtez.selektovan).setBojaUnutrasnjosti(bojaUnutr);
 					}else if(PnlCrtez.selektovan.typeToString()=="Krug"){
 						PnlCrtez.selektovan.setRadius(dlgM.sirina);
 						PnlCrtez.selektovan.setBoja(bojaStr);
-						((Krug)PnlCrtez.selektovan).setBojaUnutrasnjosti(bojaUnutr);
 					}else if(PnlCrtez.selektovan.typeToString()=="Linija"){
 						PnlCrtez.selektovan.setDuzina(dlgM.sirina);
 						PnlCrtez.selektovan.setBoja(bojaStr);

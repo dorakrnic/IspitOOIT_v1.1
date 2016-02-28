@@ -14,7 +14,7 @@ public class Tacka extends Oblik implements Comparable{
 
 
 	public Tacka(){
-		boja = "";
+		this.boja = "";
 	}
 
 	public Tacka(int x, int y){
