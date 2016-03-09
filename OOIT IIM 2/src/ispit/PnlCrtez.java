@@ -115,7 +115,7 @@ public class PnlCrtez extends JPanel {
 				if(FrmPaint.actionStr=="SELEKCIJA"){
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
-						Oblik o=(Oblik)it.next();
+					/*	Oblik o=(Oblik)it.next();
 						
 						if(o.sadrzi(e.getX(), e.getY())){
 							if(o.isSelektovan()){
@@ -129,6 +129,25 @@ public class PnlCrtez extends JPanel {
 						}else{
 							o.setSelektovan(false);	
 							selektovan=null;
+						}*/
+						Oblik o=(Oblik)it.next();
+						
+						if(o.sadrzi(e.getX(), e.getY())){
+							if(o.isSelektovan()){
+								o.setSelektovan(false);
+							}else{
+								o.setSelektovan(true);
+								selektovan=o;
+							}
+								
+						}else{
+							if(o.isSelektovan()){
+								o.setSelektovan(false);
+								selektovan=null;
+							}else{
+								o.setSelektovan(false);
+							}
+							
 						}
 						
 					}

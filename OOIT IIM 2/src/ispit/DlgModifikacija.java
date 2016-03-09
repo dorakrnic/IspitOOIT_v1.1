@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.text.DecimalFormat;
 
 import javax.swing.JCheckBox;
 import javax.swing.ButtonGroup;
@@ -39,6 +40,7 @@ public class DlgModifikacija extends JDialog {
 	private JTextField txtPomeriZaY;
 	
 	public String type=PnlCrtez.selektovan.typeToString();
+	public double duzina;
 	public int sirina;
 	public int visina;
 	public String boja;
@@ -46,8 +48,15 @@ public class DlgModifikacija extends JDialog {
 	public int pozicijaX;
 	public int pozicijaY;
 	boolean isNumb=true;
+	boolean isNumbSirina=true;
+	boolean isNumbVisina=true;
+	boolean isNumbZaX=true;
+	boolean isNumbZaY=true;
+	boolean isNumbNaX=true;
+	boolean isNumbNaY=true;
 	boolean isIspuni=false;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	DecimalFormat df=new DecimalFormat(("#"));
 	
 	/**
 	 * Launch the application.
@@ -180,6 +189,17 @@ public class DlgModifikacija extends JDialog {
 			txtPomeriNaX.setText(String.valueOf(((Tacka) PnlCrtez.selektovan).getX()));
 			txtPomeriNaY.setText(String.valueOf(((Tacka) PnlCrtez.selektovan).getY()));
 			
+		}else if(type=="Linija"){
+			btnBojaUnutrasnjosti.setVisible(false);
+			btnBojaIvice.setText("Boja linije");
+			txtNovaSirina.setVisible(true);
+			txtNovaSirina.setEnabled(false);
+			txtNovaVisina.setVisible(false);
+			lblVisina.setVisible(false);
+			lblSirina.setText("Duzina:");
+			lblSirina.setVisible(true);
+			duzina=((Linija)PnlCrtez.selektovan).duzina();
+			txtNovaSirina.setText(df.format(duzina));
 		}
 		if(type=="Kvadrat"|| type=="Pravougaonik"){
 			txtNovaSirina.setText(String.valueOf(PnlCrtez.selektovan.getStranica()));
@@ -222,7 +242,7 @@ public class DlgModifikacija extends JDialog {
 		//proveravaju se sva polja na focus out da li su brojevi
 		txtNovaSirina.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				isNumb=true;
+				/*isNumb=true;
 				isNumb=isNumb & isNumber(txtNovaSirina.getText());
 				if(txtNovaSirina.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Vrednost ce ostati nepromenjena", "Potrda", JOptionPane.INFORMATION_MESSAGE);
@@ -231,12 +251,29 @@ public class DlgModifikacija extends JDialog {
 				if(!isNumb)
 					okButton.setEnabled(false);
 				else
-					okButton.setEnabled(true);
+					okButton.setEnabled(true);*/
+				isNumbSirina=true & isNumber(txtNovaSirina.getText());
+				isNumb=isNumbSirina & isNumbVisina & isNumbNaX & isNumbNaY & isNumbZaX & isNumbZaY;
+
+					if(!isNumb){
+						if(isDouble(txtNovaSirina.getText())){
+							JOptionPane.showMessageDialog(null, "Ova verzija ne podrzava decimalne vrednosti", "Greska", JOptionPane.INFORMATION_MESSAGE);
+						}
+						okButton.setEnabled(false);
+					}
+						
+					else{
+						if(txtNovaSirina.getText().length()==0){
+							JOptionPane.showMessageDialog(null, "Vrednost ce ostati nepromenjena", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+							txtNovaSirina.setText(String.valueOf(sirina));
+						}
+						okButton.setEnabled(true);
+					}
 			}
 		});
 		txtNovaVisina.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				isNumb=isNumb & isNumber(txtNovaVisina.getText());
+				/*isNumb=isNumb & isNumber(txtNovaVisina.getText());
 				if(txtNovaVisina.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Visina ce ostati nepromenjena", "Potrda", JOptionPane.INFORMATION_MESSAGE);
 					txtNovaVisina.setText(String.valueOf(visina));
@@ -244,13 +281,28 @@ public class DlgModifikacija extends JDialog {
 				if(!isNumb)
 					okButton.setEnabled(false);
 				else
+					okButton.setEnabled(true);*/
+				isNumbVisina=true & isNumber(txtNovaVisina.getText());
+				isNumb=isNumbSirina & isNumbVisina & isNumbNaX & isNumbNaY & isNumbZaX & isNumbZaY;
+				
+				if(!isNumb){
+					if(isDouble(txtNovaVisina.getText())){
+						JOptionPane.showMessageDialog(null, "Ova verzija ne podrzava decimalne vrednosti", "Greska", JOptionPane.INFORMATION_MESSAGE);
+					}
+					okButton.setEnabled(false);
+				}else{
+					if(txtNovaVisina.getText().length()==0){
+						JOptionPane.showMessageDialog(null, "Visina ce ostati nepromenjena", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+						txtNovaVisina.setText(String.valueOf(visina));
+					}
 					okButton.setEnabled(true);
+				}
 			}
 		});
 		
 		txtPomeriNaX.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				isNumb=isNumb & isNumber(txtPomeriNaX.getText());
+				/*isNumb=isNumb & isNumber(txtPomeriNaX.getText());
 				if(txtPomeriNaX.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Postavljam X=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
 					txtPomeriNaX.setText("0");
@@ -258,13 +310,29 @@ public class DlgModifikacija extends JDialog {
 				if(!isNumb)
 					okButton.setEnabled(false);
 				else
+					okButton.setEnabled(true);*/
+				isNumbNaX=true & isNumber(txtPomeriNaX.getText());
+				isNumb=isNumbSirina & isNumbVisina & isNumbNaX & isNumbNaY & isNumbZaX & isNumbZaY;
+				if(!isNumb){
+					if(isDouble(txtPomeriNaX.getText())){
+						JOptionPane.showMessageDialog(null, "Ova verzija ne podrzava decimalne vrednosti", "Greska", JOptionPane.INFORMATION_MESSAGE);
+					}
+					okButton.setEnabled(false);
+				}
+					
+				else{
+					if(txtPomeriNaX.getText().length()==0){
+						JOptionPane.showMessageDialog(null, "Postavljam X=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+						txtPomeriNaX.setText("0");
+					}
 					okButton.setEnabled(true);
+				}
 			}
 		});
 		
 		txtPomeriNaY.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				isNumb=isNumb & isNumber(txtPomeriNaX.getText());
+				/*isNumb=isNumb & isNumber(txtPomeriNaX.getText());
 				if(txtPomeriNaY.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Postavljam Y=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
 					txtPomeriNaY.setText("0");
@@ -272,13 +340,29 @@ public class DlgModifikacija extends JDialog {
 				if(!isNumb)
 					okButton.setEnabled(false);
 				else
+					okButton.setEnabled(true);*/
+				isNumbNaY=true & isNumber(txtPomeriNaY.getText());
+				isNumb=isNumbSirina & isNumbVisina & isNumbNaX & isNumbNaY & isNumbZaX & isNumbZaY;
+				if(!isNumb){
+					if(isDouble(txtPomeriNaY.getText())){
+						JOptionPane.showMessageDialog(null, "Ova verzija ne podrzava decimalne vrednosti", "Greska", JOptionPane.INFORMATION_MESSAGE);
+					}
+					okButton.setEnabled(false);
+				}
+				
+				else{
+					if(txtPomeriNaY.getText().length()==0){
+						JOptionPane.showMessageDialog(null, "Postavljam Y=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+						txtPomeriNaY.setText("0");
+					}
 					okButton.setEnabled(true);
+				}
 			}
 		});
 		
 		txtPomeriZaX.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				isNumb=isNumb & isNumber(txtPomeriZaX.getText());
+				/*isNumb=isNumb & isNumber(txtPomeriZaX.getText());
 				if(txtPomeriZaX.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Postavljam X=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
 					txtPomeriZaX.setText("0");
@@ -286,13 +370,29 @@ public class DlgModifikacija extends JDialog {
 				if(!isNumb)
 					okButton.setEnabled(false);
 				else
+					okButton.setEnabled(true);*/
+				isNumbZaX=true & isNumber(txtPomeriZaX.getText());
+				isNumb=isNumbSirina & isNumbVisina & isNumbNaX & isNumbNaY & isNumbZaX & isNumbZaY;
+				if(!isNumb){
+					if(isDouble(txtPomeriZaX.getText())){
+						JOptionPane.showMessageDialog(null, "Ova verzija ne podrzava decimalne vrednosti", "Greska", JOptionPane.INFORMATION_MESSAGE);
+					}
+					okButton.setEnabled(false);
+				}
+					
+				else{
+					if(txtPomeriZaX.getText().length()==0){
+						JOptionPane.showMessageDialog(null, "Postavljam X=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+						txtPomeriZaX.setText("0");
+					}
 					okButton.setEnabled(true);
+				}
 			}
 		});
 		
 		txtPomeriZaY.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				isNumb=isNumb & isNumber(txtPomeriZaY.getText());
+				/*isNumb=isNumb & isNumber(txtPomeriZaY.getText());
 				if(txtPomeriZaY.getText().length()==0){
 					JOptionPane.showMessageDialog(null, "Postavljam Y=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
 					txtPomeriZaY.setText("0");
@@ -300,7 +400,23 @@ public class DlgModifikacija extends JDialog {
 				if(!isNumb)
 					okButton.setEnabled(false);
 				else
+					okButton.setEnabled(true);*/
+				isNumbZaY=true & isNumber(txtPomeriZaY.getText());
+				isNumb=isNumbSirina & isNumbVisina & isNumbNaX & isNumbNaY & isNumbZaX & isNumbZaY;
+				if(!isNumb){
+					if(isDouble(txtPomeriZaY.getText())){
+						JOptionPane.showMessageDialog(null, "Ova verzija ne podrzava decimalne vrednosti", "Greska", JOptionPane.INFORMATION_MESSAGE);
+					}
+					okButton.setEnabled(false);
+				}
+					
+				else{
+					if(txtPomeriZaY.getText().length()==0){
+						JOptionPane.showMessageDialog(null, "Postavljam Y=0", "Potrda", JOptionPane.INFORMATION_MESSAGE);
+						txtPomeriZaY.setText("0");
+					}
 					okButton.setEnabled(true);
+				}
 				
 			}
 		});
@@ -460,8 +576,18 @@ public class DlgModifikacija extends JDialog {
 	
 	public static boolean isNumber(String s){
 		try{
+			
 			int n=Integer.parseInt(s);
-			return true;
+				return true;
+		}catch(NumberFormatException e){
+			return false;
+		}
+	}
+
+	public static boolean isDouble(String s){
+		try{
+			double n=Double.parseDouble(s);
+				return true;
 		}catch(NumberFormatException e){
 			return false;
 		}
