@@ -54,11 +54,11 @@ public class PnlCrtez extends JPanel {
 					System.out.println(clickCounter);
 					if(clickCounter%2!=0){
 						t1=new Tacka(x, y, FrmPaint.bojaStr);
-						oblici.add(t1);
+						//oblici.add(t1);
 					}else{
 						t2=new Tacka(x,y,FrmPaint.bojaStr);
 						Linija l=new Linija(t1 , t2, FrmPaint.bojaStr);
-						oblici.add(t2);
+						//oblici.add(t2);
 						oblici.add(l);
 						clickCounter=0;
 					}

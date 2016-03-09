@@ -72,6 +72,7 @@ public class DlgPoruka extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						btnStr="Cancel";
 						dispose();
 					}
 				});
