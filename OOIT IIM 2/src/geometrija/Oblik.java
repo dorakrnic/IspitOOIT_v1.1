@@ -36,7 +36,7 @@ public abstract class Oblik implements Pomerljiv {
 			return Color.blue;
 		else if(boja.toLowerCase().contains("purple") || boja.toLowerCase().contains("lavender"))
 			return Color.blue.brighter();
-		else if(boja.equalsIgnoreCase("roza")||boja.equalsIgnoreCase("magenta") || boja.toLowerCase().contains("pink"))
+		else if(boja.equalsIgnoreCase("roza")||boja.toLowerCase().contains("magenta") || boja.toLowerCase().contains("pink"))
 			return Color.magenta;
 		else if(boja.equalsIgnoreCase("ljubicasta")|| boja.toLowerCase().contains("violet") || boja.equalsIgnoreCase("Fuchsia"))
 			return Color.magenta.darker();

@@ -34,13 +34,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JTextField;
-
+/**
+ * 
+ *FrmPaint --> program za crtanje
+ */
 public class FrmPaint extends JFrame {
 
 	private JPanel contentPane;
 	
 	/**
-	 * cuva naziv akcije - button clicked
+	 * actionStr --> cuva naziv akcije - button clicked
 	 */
 	public static String actionStr;
 	public static Color boja;

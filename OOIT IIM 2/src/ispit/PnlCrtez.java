@@ -96,7 +96,6 @@ public class PnlCrtez extends JPanel {
 					Iterator it = oblici.iterator();
 					while(it.hasNext()){
 						try{
-							//mora jer linija i tacka nisu povrsinski oblici pa baca exception
 							PovrsinskiOblik o=(PovrsinskiOblik)it.next();
 						
 							if(o.sadrzi(e.getX(), e.getY())){
