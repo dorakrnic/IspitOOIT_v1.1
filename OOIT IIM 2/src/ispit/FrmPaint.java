@@ -314,6 +314,7 @@ public class FrmPaint extends JFrame {
 					JOptionPane.showMessageDialog(null, "Nema oblika za brisanje", "Poruka", JOptionPane.INFORMATION_MESSAGE);
 				}
 				else{
+					actionStr=e.getActionCommand();
 					DlgPoruka dlgP=new DlgPoruka();
 					dlgP.setVisible(true);
 					if(dlgP.btnStr=="OK"){	

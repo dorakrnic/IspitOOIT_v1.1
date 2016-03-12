@@ -43,10 +43,12 @@ public class DlgPoruka extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		JLabel lblIzbrisatiSelektovaneOblike = new JLabel("");
 		
-		JLabel lblIzbrisatiSelektovaneOblike = new JLabel("Are you really really sure?");
-		
-		
+		if(FrmPaint.actionStr=="IZBRISI")
+			lblIzbrisatiSelektovaneOblike.setText("Da li ste sigurni?");
+		else //zasad se ovaj dijalog otvara samo na dva dugmeta
+			lblIzbrisatiSelektovaneOblike.setText("Brisem sve oblike?");
 		
 		lblIzbrisatiSelektovaneOblike.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblIzbrisatiSelektovaneOblike.setBounds(100, 50, 165, 14);
