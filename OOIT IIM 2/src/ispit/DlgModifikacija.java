@@ -178,7 +178,7 @@ public class DlgModifikacija extends JDialog {
 		txtPomeriNaY.setText("0");
 		txtPomeriZaX.setText("0");
 		txtPomeriZaY.setText("0");
-		
+		boja=PnlCrtez.selektovan.getBoja();
 		if(type=="Tacka"){
 			btnBojaUnutrasnjosti.setVisible(false);
 			btnBojaIvice.setText("Boja");
@@ -423,14 +423,17 @@ public class DlgModifikacija extends JDialog {
 		
 		btnBojaIvice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				FrmPaint.actionStr="btnBojaClicked";
 				try{
+					FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
+					ColorUtils cUtil=new ColorUtils();
+					FrmPaint.bojaStr=cUtil.getColorNameFromColor(FrmPaint.boja);
 					
 				}catch(Exception ex){
 					JOptionPane.showMessageDialog(null, "Boja nije izmenjena! Trenutna: " +FrmPaint.bojaStr, "Poruka", JOptionPane.INFORMATION_MESSAGE);
+					FrmPaint.bojaStr=boja;
 				}
-				FrmPaint.boja=JColorChooser.showDialog(contentPane, "Izaberi boju", Color.WHITE);
-				ColorUtils cUtil=new ColorUtils();
-				FrmPaint.bojaStr=cUtil.getColorNameFromColor(FrmPaint.boja);
+			
 				
 			}
 		});

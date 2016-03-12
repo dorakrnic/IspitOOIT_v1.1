@@ -341,17 +341,21 @@ public class FrmPaint extends JFrame {
 					if(actionStr=="OK"){
 						if(PnlCrtez.selektovan.typeToString()=="Kvadrat"){
 							PnlCrtez.selektovan.setStranica(dlgM.sirina);
-							PnlCrtez.selektovan.setBoja(bojaStr);
+							if(actionStr=="btnBojaClicked")
+								PnlCrtez.selektovan.setBoja(bojaStr);
 						}else if(PnlCrtez.selektovan.typeToString()=="Pravougaonik"){
 							PnlCrtez.selektovan.setStranica(dlgM.sirina);
 							PnlCrtez.selektovan.setVisina(dlgM.visina);
-							PnlCrtez.selektovan.setBoja(bojaStr);
+							if(actionStr=="btnBojaClicked")
+								PnlCrtez.selektovan.setBoja(bojaStr);
 						}else if(PnlCrtez.selektovan.typeToString()=="Krug"){
 							PnlCrtez.selektovan.setRadius(dlgM.sirina);
-							PnlCrtez.selektovan.setBoja(bojaStr);
+							if(actionStr=="btnBojaClicked")
+								PnlCrtez.selektovan.setBoja(bojaStr);
 						}else if(PnlCrtez.selektovan.typeToString()=="Linija"){
 							((Linija)(PnlCrtez.selektovan)).promeniDuzinu(dlgM.sirina);
-							PnlCrtez.selektovan.setBoja(bojaStr);
+							if(actionStr=="btnBojaClicked")
+								PnlCrtez.selektovan.setBoja(bojaStr);
 						}
 						//Tacka je modifikovana u DlgModifikacija
 					}
