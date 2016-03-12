@@ -99,7 +99,19 @@ public class Linija extends Oblik implements Comparable{
 	public void setKrajnja(Tacka novaKrajnja) {
 		krajnja = novaKrajnja;
 	}
-
+	/**
+	 * 
+	 * @param duzina --nova duzina linije
+	 * krajnja tacka se pomera pod istim uglom
+	 */
+	public void promeniDuzinu(int duzina){
+		int d=(int)duzina();
+		int xKateta=getKrajnja().getX()-getPocetna().getX();
+		int yKateta=getKrajnja().getY()-getPocetna().getY();
+		int xNovo=(int)((xKateta*duzina)/d);
+		int yNovo=(int)((yKateta*duzina)/d);
+		getKrajnja().pomeriNa(getPocetna().getX()+xNovo, getPocetna().getY()+yNovo);
+	}
 
 	
 	public void pomeriNa(int x, int y) {

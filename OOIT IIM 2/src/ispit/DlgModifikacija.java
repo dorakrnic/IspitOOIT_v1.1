@@ -193,7 +193,7 @@ public class DlgModifikacija extends JDialog {
 			btnBojaUnutrasnjosti.setVisible(false);
 			btnBojaIvice.setText("Boja linije");
 			txtNovaSirina.setVisible(true);
-			txtNovaSirina.setEnabled(false);
+			txtNovaSirina.setEnabled(true);
 			txtNovaVisina.setVisible(false);
 			lblVisina.setVisible(false);
 			lblSirina.setText("Duzina:");
@@ -494,6 +494,7 @@ public class DlgModifikacija extends JDialog {
 						}
 						//ako imamo brojeve setujemo vrednosti i prihvatamo ok
 						else{
+							FrmPaint.actionStr="OK";
 							if(type!="Tacka"){
 								sirina=Integer.parseInt(txtNovaSirina.getText());
 							}
@@ -565,6 +566,7 @@ public class DlgModifikacija extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						FrmPaint.actionStr="Cancel";
 						dispose();
 					}
 				});
